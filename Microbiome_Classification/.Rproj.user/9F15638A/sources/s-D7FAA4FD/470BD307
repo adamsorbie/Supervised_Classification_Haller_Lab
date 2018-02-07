@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1517828975566.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "470BD307",
+    "lastKnownWriteTime" : 1517917840,
+    "last_content_update" : 1517917840430,
+    "path" : "C:/Users/PhD/Supervised_Classification/Microbiome_Classification/supervised_classification.R",
+    "project_path" : "supervised_classification.R",
+    "properties" : {
+        "cursorPosition" : "7,73",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
