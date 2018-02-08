@@ -80,15 +80,19 @@ set.seed(42)
 X <- otu_table_scaled_labels[,1:(ncol(otu_table_scaled_labels)-1)] 
 y <- otu_table_scaled_labels[ , ncol(otu_table_scaled_labels)]
 
-#if (model == 0) {
-  
-#} else if (model == 1) {
-  
-#} else if (model = 2) {
-  
-#} else if (model == 3) {
 
-#} else { 
-#}
+if (model == 0) {
+  RF_phenotype_classify <- randomForest( x=X , y=y , ntree=500, mtry = c(1:13), importance=TRUE, proximities=TRUE  )
+} else if (model == 1) {
+  print("Unfinished")
+} else if (model == 2) {
+  print("Unfinished")
+} else if (model == 3) {
+  print("Unfinished")
+} else { 
+  print("fail")}
   
+
+
+
 
