@@ -8,8 +8,10 @@
 setwd("C:/Users/PhD/Supervised_Classification/Microbiome_Classification")  #<--- CHANGE ACCORDINGLY !!!
 
 # Enter name of OTU table file: 
-input_otu_table <- "OTUs_w_metadata-Norm.tab"        #<--- CHANGE ACCORDINGLY !!!
-  
+input_otu_table <- "test_otu.tab"        #<--- CHANGE ACCORDINGLY !!!
+
+# Enter name of mapping file: 
+mapping_file <- "test_map.tab"
 # Please select model.
 # 0 = Random-Forest Model (default) - 
 # 1 = Support Vector Machine - 
@@ -40,7 +42,7 @@ col_name <- "Phenotype"        #<--- CHANGE ACCORDINGLY !!!
 ###################       Load all required libraries     ########################
 
 # Check if required packages are already installed, and install if missing
-packages <-c("caret", "RandomForest", "ROCR") 
+packages <-c("caret", "randomForest", "ROCR") 
 
 # Function to check whether the package is installed
 InsPack <- function(pack)
@@ -61,26 +63,32 @@ flag <- all(as.logical(lib))
 
 # read data 
 
-df <- read.table(input_otu_table)
+otu <- read.table(input_otu_table, sep="\t", header=T, row.names=1, stringsAsFactors=FALSE, comment.char="", check.names=FALSE)
+mapping <- read.table(mapping_file, sep="\t", header=T, row.names=1, stringsAsFactors=FALSE, comment.char="", check.names=FALSE)
 
 # scale pre-preprocessed training data (normalised relative abundance filtered 1% abundance in at least one sample) and merge phenotype column from metadata
 
-otu_table_scaled <- scale(df, center = TRUE, scale = TRUE)
+otu_table_scaled <- scale(otu, center = TRUE, scale = TRUE)
 
 otu_table_scaled_labels <- data.frame(t(otu_table_scaled))  
-otu_table_scaled_labels$col_name <- metadata[rownames(otu_table_scaled_labels), col_name] 
+otu_table_scaled_labels[col_name] <- mapping[rownames(otu_table_scaled_labels), col_name] 
 
+# set random seed to 42 
+set.seed(42)
 
+# set X and y 
+X <- otu_table_scaled_labels[,1:(ncol(otu_table_scaled_labels)-1)] 
+y <- otu_table_scaled_labels[ , ncol(otu_table_scaled_labels)]
 
-if (model == 0) {
+#if (model == 0) {
   
-} else if (model == 1) {
+#} else if (model == 1) {
   
-} else if (model = 2) {
+#} else if (model = 2) {
   
-} else if (model == 3) {
+#} else if (model == 3) {
 
-} else { 
-}
+#} else { 
+#}
   
 
