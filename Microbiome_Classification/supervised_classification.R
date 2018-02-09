@@ -8,10 +8,10 @@
 setwd("C:/Users/PhD/Supervised_Classification/Microbiome_Classification")  #<--- CHANGE ACCORDINGLY !!!
 
 # Enter name of OTU table file: 
-input_otu_table <- "test_otu.tab"        #<--- CHANGE ACCORDINGLY !!!
+input_otu_table <- "merged_otu.tab"        #<--- CHANGE ACCORDINGLY !!!
 
 # Enter name of mapping file: 
-mapping_file <- "test_map.tab"
+mapping_file <- "merged_map.tab"
 # Please select model.
 # 0 = Random-Forest Model (default) - 
 # 1 = Support Vector Machine - 
@@ -42,7 +42,7 @@ col_name <- "Phenotype"        #<--- CHANGE ACCORDINGLY !!!
 ###################       Load all required libraries     ########################
 
 # Check if required packages are already installed, and install if missing
-packages <-c("caret", "randomForest", "ROCR") 
+packages <-c("caret", "randomForest", "ROCR", "plyr", "rfUtilities") 
 
 # Function to check whether the package is installed
 InsPack <- function(pack)
@@ -63,8 +63,8 @@ flag <- all(as.logical(lib))
 
 # read data 
 
-otu <- read.table(input_otu_table, sep="\t", header=T, row.names=1, stringsAsFactors=FALSE, comment.char="", check.names=FALSE)
-mapping <- read.table(mapping_file, sep="\t", header=T, row.names=1, stringsAsFactors=FALSE, comment.char="", check.names=FALSE)
+otu <- read.table(input_otu_table, sep="\t", header=T, row.names=1, stringsAsFactors=TRUE, comment.char="", check.names=FALSE)
+mapping <- read.table(mapping_file, sep="\t", header=T, row.names=1, stringsAsFactors=TRUE, comment.char="", check.names=FALSE)
 
 # scale pre-preprocessed training data (normalised relative abundance filtered 1% abundance in at least one sample) and merge phenotype column from metadata
 
@@ -80,9 +80,15 @@ set.seed(42)
 X <- otu_table_scaled_labels[,1:(ncol(otu_table_scaled_labels)-1)] 
 y <- otu_table_scaled_labels[ , ncol(otu_table_scaled_labels)]
 
+mtryStart <- floor(sqrt(ncol(X))) 
 
 if (model == 0) {
-  RF_phenotype_classify <- randomForest( x=X , y=y , ntree=500, mtry = c(1:13), importance=TRUE, proximities=TRUE  )
+  mtry_test <- tuneRF(X, y, mtryStart, ntreeTry=500, stepFactor=2, improve=0.05, trace=TRUE, plot=TRUE)
+  mtry <- as.data.frame(mtry_test)
+  mtry_sorted <- mtry[order(mtry$OOBError),]
+  mtry_use <- mtry_sorted$mtry[1]
+  RF_phenotype_classify <- randomForest(X , y , ntree=500, mtry = mtry_use, importance=TRUE, proximities=TRUE  )
+  print(RF_phenotype_classify)
 } else if (model == 1) {
   print("Unfinished")
 } else if (model == 2) {
