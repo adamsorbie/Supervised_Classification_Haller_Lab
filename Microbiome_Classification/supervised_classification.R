@@ -76,27 +76,43 @@ otu_table_scaled_labels[col_name] <- mapping[rownames(otu_table_scaled_labels), 
 # set random seed to 42 
 set.seed(42)
 
+
+#split into training and test 
+trainIndex = createDataPartition(otu_table_scaled_labels$Phenotype, 
+                                 p=0.7, list=FALSE,times=1)
+train = otu_table_scaled_labels[trainIndex,]
+test = otu_table_scaled_labels[-trainIndex,]
+
 # set X and y 
-X <- otu_table_scaled_labels[,1:(ncol(otu_table_scaled_labels)-1)] 
-y <- otu_table_scaled_labels[ , ncol(otu_table_scaled_labels)]
+X_train <- train[,1:(ncol(train)-1)] 
+y_train <- train[ , ncol(train)]
+X_test <- test[,1:(ncol(test)-1)] 
+# for comparing predictions against actual categories 
+actual <- test[ , ncol(test)]
 
 mtryStart <- floor(sqrt(ncol(X))) 
 
 if (model == 0) {
-  mtry_test <- tuneRF(X, y, mtryStart, ntreeTry=500, stepFactor=2, improve=0.05, trace=TRUE, plot=TRUE)
+  mtry_test <- tuneRF(X_train, y_train, mtryStart, ntreeTry=500, stepFactor=2, improve=0.05, trace=TRUE, plot=TRUE)
   mtry <- as.data.frame(mtry_test)
   mtry_sorted <- mtry[order(mtry$OOBError),]
   mtry_use <- mtry_sorted$mtry[1]
-  RF_phenotype_classify <- randomForest(X , y , ntree=500, mtry = mtry_use, importance=TRUE, proximities=TRUE  )
-  print(RF_phenotype_classify)
+  RF_classify <- randomForest(X_train, y_train, ntree=500, mtry = mtry_use, importance=TRUE, proximities=TRUE  )
+  print(RF_classify)
+  predictions <- predict(RF_classify, newdata = X_test)
+  print(predictions)
 } else if (model == 1) {
-  print("Unfinished")
+  print("Sorry, this model is not yet available, please choose another")
 } else if (model == 2) {
-  print("Unfinished")
+  print("Sorry, this model is not yet available, please choose another")
 } else if (model == 3) {
-  print("Unfinished")
+  print("Sorry, this model is not yet available, please choose another")
 } else { 
-  print("fail")}
+  print("Error, please enter a valid choice: 
+        0 = Random Forest
+        1 = SVM
+        2 = eXtreme gradient boosting
+        3 = Neural network (Multilayer Perceptron")}
   
 
 
