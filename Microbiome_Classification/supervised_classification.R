@@ -89,18 +89,30 @@ y_train <- train[ , ncol(train)]
 X_test <- test[,1:(ncol(test)-1)] 
 # for comparing predictions against actual categories 
 actual <- test[ , ncol(test)]
+# cross validation method  
+if (cv == 0) {
+    train_ctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3)  
+} else if (cv == 1) {
+    train_ctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+} else if (cv == 2) {
+    train_ctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+} else {
+  
+}
 
-mtryStart <- floor(sqrt(ncol(X))) 
 
 if (model == 0) {
-  mtry_test <- tuneRF(X_train, y_train, mtryStart, ntreeTry=500, stepFactor=2, improve=0.05, trace=TRUE, plot=TRUE)
-  mtry <- as.data.frame(mtry_test)
-  mtry_sorted <- mtry[order(mtry$OOBError),]
-  mtry_use <- mtry_sorted$mtry[1]
-  RF_classify <- randomForest(X_train, y_train, ntree=500, mtry = mtry_use, importance=TRUE, proximities=TRUE  )
-  print(RF_classify)
-  predictions <- predict(RF_classify, newdata = X_test)
-  print(predictions)
+    mtryStart <- floor(sqrt(ncol(X))) 
+    mtry_test <- tuneRF(X_train, y_train, mtryStart, ntreeTry=500, 
+                        stepFactor=2, improve=0.05, trace=TRUE, plot=TRUE)
+    mtry <- as.data.frame(mtry_test)
+    mtry_sorted <- mtry[order(mtry$OOBError),]
+    mtry_use <- mtry_sorted$mtry[1]
+    RF_classify <- randomForest(X_train, y_train, ntree=500, 
+                                mtry = mtry_use, importance=TRUE, proximities=TRUE  )
+    print(RF_classify)
+    predictions <- predict(RF_classify, newdata = X_test)
+    print(predictions)
 } else if (model == 1) {
   print("Sorry, this model is not yet available, please choose another")
 } else if (model == 2) {
