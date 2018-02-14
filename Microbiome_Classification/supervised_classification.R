@@ -87,27 +87,32 @@ test = otu_table_scaled_labels[-trainIndex,]
 X_train <- train[,1:(ncol(train)-1)] 
 y_train <- train[ , ncol(train)]
 X_test <- test[,1:(ncol(test)-1)] 
-# for comparing predictions against actual categories 
+# for comparing model predictions against actual categories 
 actual <- test[ , ncol(test)]
+
 # cross validation method  
 if (cv == 0) {
-    train_ctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3)  
+   fit_ctrl <- trainControl(method = "cv", number = 10)  
 } else if (cv == 1) {
-    train_ctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+    fit_ctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
 } else if (cv == 2) {
-    train_ctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+    fit_ctrl <- trainControl(method = "LOOCV")
 } else {
-  
+  print("Error please enter a valid selection:
+        0 = k-fold cross validation
+        1 = repeated k-fold cross validation
+        2 = leave-one-out cross validation")
 }
 
 
 if (model == 0) {
-    mtryStart <- floor(sqrt(ncol(X))) 
+    mtryStart <- floor(sqrt(ncol(X_train))) # tuneGrid=data.frame( mtry=25 ) can also use method like this for mtry, may allow slightly better tuning
     mtry_test <- tuneRF(X_train, y_train, mtryStart, ntreeTry=500, 
                         stepFactor=2, improve=0.05, trace=TRUE, plot=TRUE)
     mtry <- as.data.frame(mtry_test)
     mtry_sorted <- mtry[order(mtry$OOBError),]
-    mtry_use <- mtry_sorted$mtry[1]
+    mtry_best <- mtry_sorted$mtry[1]
+    #RF_cv <- train(X_train, y_train, method="rf", ntree=501 , mtry=mtry_best , trControl=fit_control )
     RF_classify <- randomForest(X_train, y_train, ntree=500, 
                                 mtry = mtry_use, importance=TRUE, proximities=TRUE  )
     print(RF_classify)
@@ -120,7 +125,7 @@ if (model == 0) {
 } else if (model == 3) {
   print("Sorry, this model is not yet available, please choose another")
 } else { 
-  print("Error, please enter a valid choice: 
+  print("Error, please enter a valid selection: 
         0 = Random Forest
         1 = SVM
         2 = eXtreme gradient boosting
