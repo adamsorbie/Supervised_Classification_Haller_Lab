@@ -106,18 +106,21 @@ if (cv == 0) {
 
 
 if (model == 0) {
-    mtryStart <- floor(sqrt(ncol(X_train))) # tuneGrid=data.frame( mtry=25 ) can also use method like this for mtry, may allow slightly better tuning
-    mtry_test <- tuneRF(X_train, y_train, mtryStart, ntreeTry=500, 
-                        stepFactor=2, improve=0.05, trace=TRUE, plot=TRUE)
-    mtry <- as.data.frame(mtry_test)
-    mtry_sorted <- mtry[order(mtry$OOBError),]
-    mtry_best <- mtry_sorted$mtry[1]
-    #RF_cv <- train(X_train, y_train, method="rf", ntree=501 , mtry=mtry_best , trControl=fit_control )
-    RF_classify <- randomForest(X_train, y_train, ntree=500, 
-                                mtry = mtry_use, importance=TRUE, proximities=TRUE  )
-    print(RF_classify)
-    predictions <- predict(RF_classify, newdata = X_test)
-    print(predictions)
+    mtryStart <- floor(sqrt(ncol(X_train)))
+    mtryexpand <- seq(from = mtryStart-10, to= mtryStart+10, by=2) # tuneGrid=data.frame( mtry=25 ) can also use method like this for mtry, may allow slightly better tuning
+    #mtry_test <- tuneRF(X_train, y_train, mtryStart, ntreeTry=500, 
+    #stepFactor=2, improve=0.05, trace=TRUE, plot=TRUE)
+    #mtry <- as.data.frame(mtry_test)
+    #mtry_sorted <- mtry[order(mtry$OOBError),]
+    #mtry_best <- mtry_sorted$mtry[1]
+    tunegrid <- expand.grid(.mtry=mtryexpand)
+    RF_cv <- train(X_train, y_train, method="rf", ntree=501 , 
+                   tuneGrid=tunegrid, trControl=fit_ctrl )
+    #RF_classify <- randomForest(X_train, y_train, ntree=500, y
+    #mtry = mtry_use, importance=TRUE, proximities=TRUE  )
+    #print(RF_classify)
+    predictions <- predict(RF_cv, newdata = X_test)
+    #print(predictions)
 } else if (model == 1) {
   print("Sorry, this model is not yet available, please choose another")
 } else if (model == 2) {
