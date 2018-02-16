@@ -25,7 +25,7 @@ model <- 0        #<--- CHANGE ACCORDINGLY !!!
 # 1 = Repeated k-fold Cross Validation -
 # 2 = Leave-one-out cross validation -
 
-cv <- 0        #<--- CHANGE ACCORDINGLY !!!   
+cv <- 1       #<--- CHANGE ACCORDINGLY !!!   
 
 # Please give the column where the categorical variable is found 
 
@@ -88,7 +88,7 @@ X_train <- train[,1:(ncol(train)-1)]
 y_train <- train[ , ncol(train)]
 X_test <- test[,1:(ncol(test)-1)] 
 # for comparing model predictions against actual categories 
-actual <- test[ , ncol(test)]
+actual <- as.character(test[ , ncol(test)])
 
 # cross validation method  
 if (cv == 0) {
@@ -107,20 +107,16 @@ if (cv == 0) {
 
 if (model == 0) {
     mtryStart <- floor(sqrt(ncol(X_train)))
-    mtryexpand <- seq(from = mtryStart-10, to= mtryStart+10, by=2) # tuneGrid=data.frame( mtry=25 ) can also use method like this for mtry, may allow slightly better tuning
-    #mtry_test <- tuneRF(X_train, y_train, mtryStart, ntreeTry=500, 
-    #stepFactor=2, improve=0.05, trace=TRUE, plot=TRUE)
-    #mtry <- as.data.frame(mtry_test)
-    #mtry_sorted <- mtry[order(mtry$OOBError),]
-    #mtry_best <- mtry_sorted$mtry[1]
+    mtryexpand <- seq(from = mtryStart-10, to= mtryStart+10, by=2) 
     tunegrid <- expand.grid(.mtry=mtryexpand)
     RF_cv <- train(X_train, y_train, method="rf", ntree=501 , 
                    tuneGrid=tunegrid, trControl=fit_ctrl )
-    #RF_classify <- randomForest(X_train, y_train, ntree=500, y
-    #mtry = mtry_use, importance=TRUE, proximities=TRUE  )
-    #print(RF_classify)
     predictions <- predict(RF_cv, newdata = X_test)
-    #print(predictions)
+    samples <- row.names(X_test)
+    pred_df <- data.frame(samples, actual, predictions) 
+    print(pred_df)
+    
+    write.table(pred_df, file = "random_forest_predictions.tsv", sep="\t", row.names = FALSE) 
 } else if (model == 1) {
   print("Sorry, this model is not yet available, please choose another")
 } else if (model == 2) {
