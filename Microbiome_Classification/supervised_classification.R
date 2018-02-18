@@ -15,8 +15,7 @@ mapping_file <- "merged_map.tab"
 # Please select model.
 # 0 = Random-Forest Model (default) - 
 # 1 = Support Vector Machine - 
-# 2 = eXtreme Gradient Boosting - 
-# 3 = Neural Network (Multi-layer Perceptron) - 
+# 2 = eXtreme Gradient Boosting -   
  
 model <- 0        #<--- CHANGE ACCORDINGLY !!!
 
@@ -115,8 +114,14 @@ if (model == 0) {
     samples <- row.names(X_test)
     pred_df <- data.frame(samples, actual, predictions) 
     print(pred_df)
-    
-    write.table(pred_df, file = "random_forest_predictions.tsv", sep="\t", row.names = FALSE) 
+    pred_df$Correct <- pred_df$actual == pred_df$predictions
+    result <- confusionMatrix(predictions, actual)
+    precision <- result$byClass['Pos Pred Value']    
+    recall <- result$byClass['Sensitivity']
+    correct_predictions <- as.data.frame(result$table)
+    correct_predictions <- correct_predictions[-c(2,3), ]
+    accuracy <- sum(correct_predictions$Freq) / length(actual)
+    write.table(pred_df, file = "random_forest_predictions.tsv", sep="\t", row.names = FALSE)
 } else if (model == 1) {
   print("Sorry, this model is not yet available, please choose another")
 } else if (model == 2) {
