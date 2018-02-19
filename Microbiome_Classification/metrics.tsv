@@ -1,0 +1,2 @@
+"V1"	"Sensitivity"	"Specificity"	"Pos.Pred.Value"	"Neg.Pred.Value"	"Precision"	"Recall"	"F1"	"Prevalence"	"Detection.Rate"	"Detection.Prevalence"	"Balanced.Accuracy"	"Accuracy"	"Kappa"	"AccuracyLower"	"AccuracyUpper"	"AccuracyNull"	"AccuracyPValue"	"McnemarPValue"
+"T"	"0.631578947368421"	"0.977777777777778"	"0.923076923076923"	"0.862745098039216"	"0.923076923076923"	"0.631578947368421"	"0.75"	"0.296875"	"0.1875"	"0.203125"	"0.804678362573099"	"0.875"	"0.67052767052767"	"0.768473694033996"	"0.944457208820398"	"0.703125"	"0.00105556814353286"	"0.077099871743542"

@@ -3,7 +3,7 @@
 # Version: 0.9 
 # 2018-02-05  Author: Adam Sorbie 
 #
-#  Please set the directory of the script as the working folder (e.g D:/studyname/NGS-Data/Rhea/beta-diversity/)
+#  Please set the directory of the script as the working folder (e.g C:/studyname/NGS-Data/Microbiome_classification)
 #' Note: the path is denoted by forward slash "/"
 setwd("C:/Users/PhD/Supervised_Classification/Microbiome_Classification")  #<--- CHANGE ACCORDINGLY !!!
 
@@ -11,13 +11,13 @@ setwd("C:/Users/PhD/Supervised_Classification/Microbiome_Classification")  #<---
 input_otu_table <- "merged_otu.tab"        #<--- CHANGE ACCORDINGLY !!!
 
 # Enter name of mapping file: 
-mapping_file <- "merged_map.tab"
+mapping_file <- "merged_map.tab"         #<--- CHANGE ACCORDINGLY !!!
 # Please select model.
 # 0 = Random-Forest Model (default) - 
 # 1 = Support Vector Machine - 
 # 2 = eXtreme Gradient Boosting -   
  
-model <- 0        #<--- CHANGE ACCORDINGLY !!!
+model <- 0       #<--- CHANGE ACCORDINGLY !!!
 
 # Please select cross-validation method: 
 # 0 = k-fold Cross-validation (default) -
@@ -31,7 +31,6 @@ cv <- 1       #<--- CHANGE ACCORDINGLY !!!
 col_name <- "Phenotype"        #<--- CHANGE ACCORDINGLY !!!   
 
 
-  
 ######                  NO CHANGES REQUIRED BELOW THIS LINE                 ######
 
 ##################################################################################
@@ -65,7 +64,7 @@ flag <- all(as.logical(lib))
 otu <- read.table(input_otu_table, sep="\t", header=T, row.names=1, stringsAsFactors=TRUE, comment.char="", check.names=FALSE)
 mapping <- read.table(mapping_file, sep="\t", header=T, row.names=1, stringsAsFactors=TRUE, comment.char="", check.names=FALSE)
 
-# scale pre-preprocessed training data (normalised relative abundance filtered 1% abundance in at least one sample) and merge phenotype column from metadata
+# scale pre-preprocessed training data and merge phenotype column from metadata
 
 otu_table_scaled <- scale(otu, center = TRUE, scale = TRUE)
 
@@ -79,12 +78,12 @@ set.seed(42)
 #split into training and test 
 trainIndex = createDataPartition(otu_table_scaled_labels$Phenotype, 
                                  p=0.7, list=FALSE,times=1)
-train = otu_table_scaled_labels[trainIndex,]
+training = otu_table_scaled_labels[trainIndex,]
 test = otu_table_scaled_labels[-trainIndex,]
 
 # set X and y 
-X_train <- train[,1:(ncol(train)-1)] 
-y_train <- train[ , ncol(train)]
+X_train <- training[,1:(ncol(training)-1)] 
+y_train <- training[ , ncol(training)]
 X_test <- test[,1:(ncol(test)-1)] 
 # for comparing model predictions against actual categories 
 actual <- as.character(test[ , ncol(test)])
@@ -109,31 +108,35 @@ if (model == 0) {
     mtryexpand <- seq(from = mtryStart-10, to= mtryStart+10, by=2) 
     tunegrid <- expand.grid(.mtry=mtryexpand)
     RF_cv <- train(X_train, y_train, method="rf", ntree=501 , 
-                   tuneGrid=tunegrid, trControl=fit_ctrl )
+                   tuneGrid=tunegrid, trControl=fit_ctrl)
+    mtry_imp <- RF_cv$results[order("Accuracy")]
+    RF_classify_imp <- randomForest(X_train, y_train, importance = TRUE, proximity = TRUE, ntree = 501, mtry = )
     predictions <- predict(RF_cv, newdata = X_test)
     samples <- row.names(X_test)
     pred_df <- data.frame(samples, actual, predictions) 
     print(pred_df)
     pred_df$Correct <- pred_df$actual == pred_df$predictions
     result <- confusionMatrix(predictions, actual)
-    precision <- result$byClass['Pos Pred Value']    
-    recall <- result$byClass['Sensitivity']
-    correct_predictions <- as.data.frame(result$table)
-    correct_predictions <- correct_predictions[-c(2,3), ]
-    accuracy <- sum(correct_predictions$Freq) / length(actual)
-    write.table(pred_df, file = "random_forest_predictions.tsv", sep="\t", row.names = FALSE)
+    metrics <- data.frame(cbind(t(result$positive),t(result$byClass), t(result$overall)))
+    write.table(pred_df, file = "random_forest_predictions.tsv", sep="\t", row.names = FALSE) # output to folders
+    write.table(result$table, file = "confusion_matrix.tsv", sep="\t", row.names = FALSE)
+    write.table(metrics, file="metrics.tsv", sep="\t", row.names = FALSE)
 } else if (model == 1) {
-  print("Sorry, this model is not yet available, please choose another")
+  svm_cv <- train(X_train, y_train, method="svmLinear", trControl= fit_ctrl ) #tunegrid 
+  predictions <- predict(svm_cv, newdata = X_test)
+  samples <- row.names(X_test)
+  pred_df <- data.frame(samples, actual, predictions) 
+  print(pred_df)
+  pred_df$Correct <- pred_df$actual == pred_df$predictions
+  result <- confusionMatrix(predictions, actual)
+  print(svm_cv)
 } else if (model == 2) {
-  print("Sorry, this model is not yet available, please choose another")
-} else if (model == 3) {
   print("Sorry, this model is not yet available, please choose another")
 } else { 
   print("Error, please enter a valid selection: 
         0 = Random Forest
         1 = SVM
-        2 = eXtreme gradient boosting
-        3 = Neural network (Multilayer Perceptron")}
+        2 = eXtreme gradient boosting")}
   
 
 
