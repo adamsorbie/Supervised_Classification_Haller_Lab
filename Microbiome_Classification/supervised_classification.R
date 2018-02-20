@@ -110,12 +110,6 @@ if (model == 0) {
     RF_cv <- train(X_train, y_train, method="rf", ntree=501 , 
                    tuneGrid=tunegrid, trControl=fit_ctrl)
     importance <- varImp(RF_cv)
-    mtry_imp <- as.data.frame(RF_cv$results)
-    mtry_imp_sorted <- mtry_imp[order(mtry_imp[,2]), ]
-    mtry_classify <- tail(mtry_imp_sorted$mtry, n=1) # not sure if this is the best way to do this 
-    RF_classify_imp <- randomForest(X_train, y_train, importance = TRUE,
-                                    proximity = TRUE, ntree = 501, 
-                                    mtry = mtry_classify)
     predictions <- predict(RF_cv, newdata = X_test)
     samples <- row.names(X_test)
     pred_df <- data.frame(samples, actual, predictions) 
@@ -123,9 +117,16 @@ if (model == 0) {
     pred_df$Correct <- pred_df$actual == pred_df$predictions
     result <- confusionMatrix(predictions, actual)
     metrics <- data.frame(cbind(t(result$positive),t(result$byClass), t(result$overall)))
-    write.table(pred_df, file = "random_forest_predictions.tsv", sep="\t", row.names = FALSE) # output to folders
-    write.table(result$table, file = "confusion_matrix.tsv", sep="\t", row.names = FALSE)
-    write.table(metrics, file="metrics.tsv", sep="\t", row.names = FALSE)
+    importance <- importance$importance
+    otu_names = cbind(OTU=row.names(importance), importance)
+    importance_sorted <- arrange(importance, otu_names  , desc(Overall)  )
+
+    
+    importance_plot
+    write.table(importance, file="importance.tab", sep="\t")
+    write.table(pred_df, file = "random_forest_predictions.tab", sep="\t", row.names = FALSE) # output to folders
+    write.table(result$table, file = "confusion_matrix.tab", sep="\t", row.names = FALSE)
+    write.table(metrics, file="metrics.tab", sep="\t", row.names = FALSE)
 } else if (model == 1) {
   svm_cv <- train(X_train, y_train, method="svmLinear", trControl= fit_ctrl ) #tunegrid 
   predictions <- predict(svm_cv, newdata = X_test)
