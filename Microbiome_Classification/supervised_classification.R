@@ -109,8 +109,13 @@ if (model == 0) {
     tunegrid <- expand.grid(.mtry=mtryexpand)
     RF_cv <- train(X_train, y_train, method="rf", ntree=501 , 
                    tuneGrid=tunegrid, trControl=fit_ctrl)
-    mtry_imp <- RF_cv$results[order("Accuracy")]
-    RF_classify_imp <- randomForest(X_train, y_train, importance = TRUE, proximity = TRUE, ntree = 501, mtry = )
+    importance <- varImp(RF_cv)
+    mtry_imp <- as.data.frame(RF_cv$results)
+    mtry_imp_sorted <- mtry_imp[order(mtry_imp[,2]), ]
+    mtry_classify <- tail(mtry_imp_sorted$mtry, n=1) # not sure if this is the best way to do this 
+    RF_classify_imp <- randomForest(X_train, y_train, importance = TRUE,
+                                    proximity = TRUE, ntree = 501, 
+                                    mtry = mtry_classify)
     predictions <- predict(RF_cv, newdata = X_test)
     samples <- row.names(X_test)
     pred_df <- data.frame(samples, actual, predictions) 
