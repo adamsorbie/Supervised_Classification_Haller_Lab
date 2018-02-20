@@ -13,9 +13,9 @@ input_otu_table <- "merged_otu.tab"        #<--- CHANGE ACCORDINGLY !!!
 # Enter name of mapping file: 
 mapping_file <- "merged_map.tab"         #<--- CHANGE ACCORDINGLY !!!
 # Please select model.
-# 0 = Random-Forest Model (default) - 
-# 1 = Support Vector Machine - 
-# 2 = eXtreme Gradient Boosting -   
+# 0 = Random-Forest Model (default) - general purpose model
+# 1 = Support Vector Machine - simple model, useful for classifying data which can be linearly separated
+# 2 = eXtreme Gradient Boosting - may offer increased accuracy over Random-Forest, if RF results are not satisfactory, try this model  
  
 model <- 0       #<--- CHANGE ACCORDINGLY !!!
 
