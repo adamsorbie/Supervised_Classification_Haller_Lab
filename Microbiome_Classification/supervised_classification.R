@@ -104,46 +104,46 @@ if (cv == 0) {
 
 
 if (model == 0) {
-    mtryStart <- floor(sqrt(ncol(X_train)))
-    mtryexpand <- seq(from = mtryStart-10, to= mtryStart+10, by=2) 
-    tunegrid <- expand.grid(.mtry=mtryexpand)
-    RF_cv <- train(X_train, y_train, method="rf", ntree=501 , 
-                   tuneGrid=tunegrid, trControl=fit_ctrl)
-    importance <- varImp(RF_cv)
-    predictions <- predict(RF_cv, newdata = X_test)
-    samples <- row.names(X_test)
-    pred_df <- data.frame(samples, actual, predictions) 
-    print(pred_df)
-    pred_df$Correct <- pred_df$actual == pred_df$predictions
-    result <- confusionMatrix(predictions, actual)
-    metrics <- data.frame(cbind(t(result$positive),t(result$byClass), t(result$overall)))
-    importance <- importance$importance
-    otu_names = cbind(OTU=row.names(importance), importance)
-    importance_sorted <- arrange(importance, otu_names  , desc(Overall)  )
+      mtryStart <- floor(sqrt(ncol(X_train)))
+      mtryexpand <- seq(from = mtryStart-10, to= mtryStart+10, by=2) 
+      tunegrid <- expand.grid(.mtry=mtryexpand)
+      RF_cv <- train(X_train, y_train, method="rf", ntree=501 , 
+                     tuneGrid=tunegrid, trControl=fit_ctrl)
+      importance <- varImp(RF_cv)
+      predictions <- predict(RF_cv, newdata = X_test)
+      samples <- row.names(X_test)
+      pred_df <- data.frame(samples, actual, predictions) 
+      print(pred_df)
+      pred_df$Correct <- pred_df$actual == pred_df$predictions
+      result <- confusionMatrix(predictions, actual)
+      metrics <- data.frame(cbind(t(result$positive),t(result$byClass), t(result$overall)))
+      importance <- importance$importance
+      otu_names = cbind(OTU=row.names(importance), importance)
+      importance_sorted <- arrange(importance, otu_names  , desc(Overall)  )
 
     
-    importance_plot
-    write.table(importance, file="importance.tab", sep="\t")
-    write.table(pred_df, file = "random_forest_predictions.tab", sep="\t", row.names = FALSE) # output to folders
-    write.table(result$table, file = "confusion_matrix.tab", sep="\t", row.names = FALSE)
-    write.table(metrics, file="metrics.tab", sep="\t", row.names = FALSE)
+      importance_plot
+      write.table(importance, file="importance.tab", sep="\t")
+      write.table(pred_df, file = "random_forest_predictions.tab", sep="\t", row.names = FALSE) # output to folders
+      write.table(result$table, file = "confusion_matrix.tab", sep="\t", row.names = FALSE)
+      write.table(metrics, file="metrics.tab", sep="\t", row.names = FALSE)
 } else if (model == 1) {
-  svm_cv <- train(X_train, y_train, method="svmLinear", trControl= fit_ctrl ) #tunegrid 
-  predictions <- predict(svm_cv, newdata = X_test)
-  samples <- row.names(X_test)
-  pred_df <- data.frame(samples, actual, predictions) 
-  print(pred_df)
-  pred_df$Correct <- pred_df$actual == pred_df$predictions
-  result <- confusionMatrix(predictions, actual)
-  print(svm_cv)
+      svm_cv <- train(X_train, y_train, method="svmLinear", trControl= fit_ctrl ) #tunegrid 
+      predictions <- predict(svm_cv, newdata = X_test)
+      samples <- row.names(X_test)
+      pred_df <- data.frame(samples, actual, predictions) 
+      print(pred_df)
+      pred_df$Correct <- pred_df$actual == pred_df$predictions
+      result <- confusionMatrix(predictions, actual)
+      print(svm_cv)
 } else if (model == 2) {
-  Xgb_cv <- train(X_train, y_train, method="xgbTree", trControl= fit_ctrl)
-  predictions <- predict(Xgb_cv, newdata= X_test)
+      Xgb_cv <- train(X_train, y_train, method="xgbTree", trControl= fit_ctrl)
+      predictions <- predict(Xgb_cv, newdata= X_test)
 } else { 
-  print("Error, please enter a valid selection: 
-        0 = Random Forest
-        1 = SVM
-        2 = eXtreme gradient boosting")}
+      print("Error, please enter a valid selection: 
+            0 = Random Forest
+            1 = SVM
+            2 = eXtreme gradient boosting")}
   
 
 
