@@ -17,7 +17,7 @@ mapping_file <- "merged_map.tab"         #<--- CHANGE ACCORDINGLY !!!
 # 1 = Support Vector Machine - simple model, useful for classifying data which can be linearly separated
 # 2 = eXtreme Gradient Boosting - may offer increased accuracy over Random-Forest, if RF results are not satisfactory, try this model  
  
-model <- 0       #<--- CHANGE ACCORDINGLY !!!
+model <- 2       #<--- CHANGE ACCORDINGLY !!!
 
 # Please select cross-validation method: 
 # 0 = k-fold Cross-validation (default) -
@@ -40,7 +40,7 @@ col_name <- "Phenotype"        #<--- CHANGE ACCORDINGLY !!!
 ###################       Load all required libraries     ########################
 
 # Check if required packages are already installed, and install if missing
-packages <-c("caret", "randomForest", "ROCR", "plyr", "rfUtilities") 
+packages <-c("caret", "ROCR", "plyr", "rfUtilities", "xgboost") 
 
 # Function to check whether the package is installed
 InsPack <- function(pack)
@@ -137,7 +137,8 @@ if (model == 0) {
   result <- confusionMatrix(predictions, actual)
   print(svm_cv)
 } else if (model == 2) {
-  print("Sorry, this model is not yet available, please choose another")
+  Xgb_cv <- train(X_train, y_train, method="xgbTree", trControl= fit_ctrl)
+  predictions <- predict(Xgb_cv, newdata= X_test)
 } else { 
   print("Error, please enter a valid selection: 
         0 = Random Forest
