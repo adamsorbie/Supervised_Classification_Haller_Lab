@@ -17,14 +17,14 @@ mapping_file <- "merged_map.tab"         #<--- CHANGE ACCORDINGLY !!!
 # 1 = Support Vector Machine - simple model, useful for classifying data which can be linearly separated
 # 2 = eXtreme Gradient Boosting - may offer increased accuracy over Random-Forest, if RF results are not satisfactory, try this model  
  
-model <- 2       #<--- CHANGE ACCORDINGLY !!!
+model <- 0      #<--- CHANGE ACCORDINGLY !!!
 
 # Please select cross-validation method: 
 # 0 = k-fold Cross-validation (default) -
 # 1 = Repeated k-fold Cross Validation -
 # 2 = Leave-one-out cross validation -
 
-cv <- 1       #<--- CHANGE ACCORDINGLY !!!   
+cv <- 0       #<--- CHANGE ACCORDINGLY !!!   
 
 # Please give the column where the categorical variable is found 
 
@@ -40,7 +40,7 @@ col_name <- "Phenotype"        #<--- CHANGE ACCORDINGLY !!!
 ###################       Load all required libraries     ########################
 
 # Check if required packages are already installed, and install if missing
-packages <-c("caret", "ROCR", "plyr", "rfUtilities", "xgboost") 
+packages <-c("caret", "ROCR", "dplyr", "rfUtilities", "xgboost") 
 
 # Function to check whether the package is installed
 InsPack <- function(pack)
@@ -119,9 +119,10 @@ if (model == 0) {
       metrics <- data.frame(cbind(t(result$positive),t(result$byClass), t(result$overall)))
       importance <- importance$importance
       otu_names = cbind(OTU=row.names(importance), importance)
-      importance_sorted <- arrange(importance, otu_names  , desc(Overall)  )
-
-    
+      importance_sorted <- importance[order(-importance$Overall), , drop=FALSE]
+      top_10 <- head(importance_sorted, n= 10L)
+      top_10 <- as.matrix(top_10)
+      importance_plot <- barplot(top_10)
       importance_plot
       write.table(importance, file="importance.tab", sep="\t")
       write.table(pred_df, file = "random_forest_predictions.tab", sep="\t", row.names = FALSE) # output to folders
@@ -139,6 +140,12 @@ if (model == 0) {
 } else if (model == 2) {
       Xgb_cv <- train(X_train, y_train, method="xgbTree", trControl= fit_ctrl)
       predictions <- predict(Xgb_cv, newdata= X_test)
+      samples <- row.names(X_test)
+      pred_df <- data.frame(samples, actual, predictions) 
+      print(pred_df)
+      pred_df$Correct <- pred_df$actual == pred_df$predictions
+      result <- confusionMatrix(predictions, actual)
+      print(Xgb_cv)
 } else { 
       print("Error, please enter a valid selection: 
             0 = Random Forest
