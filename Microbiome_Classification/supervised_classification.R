@@ -40,7 +40,7 @@ col_name <- "Phenotype"        #<--- CHANGE ACCORDINGLY !!!
 ###################       Load all required libraries     ########################
 
 # Check if required packages are already installed, and install if missing
-packages <-c("caret", "ROCR", "dplyr", "rfUtilities", "xgboost") 
+packages <-c("caret", "ROCR", "dplyr", "xgboost") 
 
 # Function to check whether the package is installed
 InsPack <- function(pack)
@@ -118,12 +118,14 @@ if (model == 0) {
       result <- confusionMatrix(predictions, actual)
       metrics <- data.frame(cbind(t(result$positive),t(result$byClass), t(result$overall)))
       importance <- importance$importance
-      otu_names = cbind(OTU=row.names(importance), importance)
-      importance_sorted <- importance[order(-importance$Overall), , drop=FALSE]
-      top_10 <- head(importance_sorted, n= 10L)
-      top_10 <- as.matrix(top_10)
-      importance_plot <- barplot(top_10)
+      otu_names = cbind(OTU=row.names(importance), importance) # clean this code up and make sure it works in all cases (drop index also)
+      importance_sorted <- otu_names[order(-otu_names$Overall), , drop=FALSE]
+      pdf("feature_importance_top10.pdf", width = 10, height = 5)
+      importance_plot <- barplot(importance_sorted[1:10, "Overall"], names.arg=importance_sorted[1:10, "OTU"], 
+                                 ylab="Variable Importance", las=2, ylim=c(0,100), col = "darkblue",
+                                 main="Feature Importance (Top 10)") 
       importance_plot
+      dev.off()
       write.table(importance, file="importance.tab", sep="\t")
       write.table(pred_df, file = "random_forest_predictions.tab", sep="\t", row.names = FALSE) # output to folders
       write.table(result$table, file = "confusion_matrix.tab", sep="\t", row.names = FALSE)
