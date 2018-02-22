@@ -126,6 +126,11 @@ if (model == 0) {
                                  main="Feature Importance (Top 10)") 
       importance_plot
       dev.off()
+      if (cv == 0 | 1) {
+            
+      } else if (cv == 2) {
+        
+      }
       write.table(importance, file="importance.tab", sep="\t")
       write.table(pred_df, file = "random_forest_predictions.tab", sep="\t", row.names = FALSE) # output to folders
       write.table(result$table, file = "confusion_matrix.tab", sep="\t", row.names = FALSE)
