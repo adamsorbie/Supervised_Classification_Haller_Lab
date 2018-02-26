@@ -1,0 +1,183 @@
+#SampleID	Intervention	Time_point	Intervention-time point	Disease_status	Treatment	Intervention_disease-status	Total score wPCDAI (0-125)	CRP (mg/dl)	ESR (mm/h)_ ESR 2 Stunden	Eiwei§	Albumin (g/dl)	Leukozyten (G/l)	IGF-1	Calprotectin (mg/l)	Haemoglobin (g/dl)	Height (cm)	Weight (kg)
+001_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Mild	Infliximab	Non-PEN_Mild	17.5	0.1	7	8	4.7	7.7	505	59	13.7	173	65.4
+002_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Mild	Humira	Non-PEN_Mild	17.5	0.24	10	7.6	4.5	9.4	283	1954	13.8	166.4	58.8
+003_ZP0	PEN	Baseline	PEN_Baseline	Remission	5ASA_Infliximab_MTX	PEN_Remission	10	0.18	12	7.6	4.3	5.8	83.1	1188	12.7	154.8	43.1
+004_ZP0	PEN	Baseline	PEN_Baseline	Remission	Azathioprin_5ASA	PEN_Remission	0	0.26	5	7.4	4.7	5	306	443	14.7	182.5	76
+005_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Azathioprin_Infliximab	Non-PEN_Remission	7.5	0.11	21	7.8	4.3	6.8	312	103	12.6	156	58.9
+006_ZP0	PEN	Baseline	PEN_Baseline	Mild	Azathioprin_Infliximab	PEN_Mild	25	1.65	52	8.6	4.4	6.6	92.5	491	12.3	157	35.9
+007_ZP0	PEN	Baseline	PEN_Baseline	Remission	5ASA	PEN_Remission	0	0.1	9	7.6	5.2	2.5	400	11	13.4	163	57.8
+008_ZP0	PEN	Baseline	PEN_Baseline	Mild	None	PEN_Mild	27.5	0.1	6	6.7	3.9	8.1	352	750	12.9	152	36.8
+009_ZP0	PEN	Baseline	PEN_Baseline	Remission	Azathioprin_5ASA_Infliximab	PEN_Remission	10	0.1	6	7.7	4.5	3.8	220	BA	12.5	149	34.3
+010_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Infliximab	Non-PEN_Remission	0	0.1	5	7.3	5.1	4.3	361	22	13.2	162.9	52.2
+011_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.29	5	8.1	4.9	8.9	396	BA	14.1	179.7	62.9
+012_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Infliximab	Non-PEN_Remission	0	0.1	9	7.2	4.3	5.7	426	62	10.9	158.8	73.7
+013_ZP0	PEN	Baseline	PEN_Baseline	Remission	Infliximab	PEN_Remission	0	0.1	10	7.5	4.5	4.7	230	96	13.5	162.5	42.4
+014_ZP0	PEN	Baseline	PEN_Baseline	Remission	Azathioprin_5ASA_Infliximab	PEN_Remission	7.5	4.35	BA	7.9	4.6	9.2	248	104	12	150.4	47.7
+015_ZP0	PEN	Baseline	PEN_Baseline	Remission	Infliximab	PEN_Remission	0	0.75	5	7.7	5	7.9	414	62	15.7	186	75.2
+016_ZP0-1	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Infliximab_MTX	Non-PEN_Remission	0	0.1	4	7.9	5	3.8	194	24	13.6	153	36
+016_ZP0-2	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Infliximab_MTX	Non-PEN_Remission	0	0.1	4	7.9	5	3.8	194	24	13.6	153	36
+017_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Infliximab	Non-PEN_Remission	0	0.1	1	6.9	4.3	6.4	173	86	14.7	149	33.6
+018_ZP0	PEN	Baseline	PEN_Baseline	Remission	Infliximab	PEN_Remission	0	0.12	11	7.7	4.3	8.9	316	348	13.4	184	66.3
+019_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.1	16	8.3	4.9	7.1	420	175	13.5	152.4	36.9
+020_ZP0-1	PEN	Baseline	PEN_Baseline	Remission	Azathioprin	PEN_Remission	7.5	0.1	25	7.5	4.4	5.2	407	105	12.5	155	55.5
+020_ZP0-2	PEN	Baseline	PEN_Baseline	Remission	Azathioprin	PEN_Remission	7.5	0.1	25	7.5	4.4	5.2	407	105	12.5	155	55.5
+021_ZP0	PEN	Baseline	PEN_Baseline	Remission	Azathioprin_Infliximab	PEN_Remission	7.5	0.52	4	7.7	4.4	8.3	323	1263	14.9	179.1	72.8
+022_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Azathioprin_5ASA	Non-PEN_Remission	0	0.42	2	7.33	4.7	8.66	193	65	11	117.8	25.5
+023_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Azathioprin	Non-PEN_Remission	0	0.2	20	6.9	3.9	7.1	BA	362	12.7	174	52
+024_ZP0	PEN	Baseline	PEN_Baseline	Remission	Infliximab_MTX	PEN_Remission	10	0.1	8	7.5	3.9	4.9	394	353	10.7	159	50.6
+025_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.1	4	7.1	4.3	6.5	623	74	13.5	160	48.7
+026_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	5ASA	Non-PEN_Remission	0	BA	BA	BA	BA	BA	134	BA	BA	128.9	27.4
+027_ZP0	PEN	Baseline	PEN_Baseline	Remission	Azathioprin_5ASA	PEN_Remission	0	0.11	20	7.5	4.6	5.4	393	134	11.6	162.5	46.7
+028_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Azathioprin	Non-PEN_Remission	0	0.1	14	7.4	5	11.9	BA	173	12.3	154.6	45.2
+029_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Infliximab	Non-PEN_Remission	0	0.1	17	7.3	4.6	5.5	247	24	13	143	33.5
+030_ZP0	PEN	Baseline	PEN_Baseline	Remission	Azathioprin	PEN_Remission	0	0.94	1	7.43	4.3	4.55	525	BA	13.9	179.2	93.4
+032_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.2	14	7	3.9	7.4	345	1988	13.9	163	64.1
+033_ZP0	PEN	Baseline	PEN_Baseline	Remission	MTX	PEN_Remission	0	0.27	16	7.4	4.1	10.4	336	1734	12.3	154	39.2
+034_ZP0	PEN	Baseline	PEN_Baseline	Remission	Infliximab	PEN_Remission	10	0.1	9	8.3	5	6.2	233	104	13	142	28.7
+035_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Azathioprin_5ASA	Non-PEN_Remission	7.5	0.5	28	7.7	4.8	5.8	261	BA	13.2	154.8	50.2
+036_ZP0-1	PEN	Baseline	PEN_Baseline	Remission	Infliximab	PEN_Remission	0	0.1	6	8.1	5.2	7.9	505	BA	15.3	182.4	62.3
+036_ZP0-2	PEN	Baseline	PEN_Baseline	Remission	Infliximab	PEN_Remission	0	0.1	6	8.1	5.2	7.9	505	BA	15.3	182.4	62.3
+037_ZP0	PEN	Baseline	PEN_Baseline	Remission	Azathioprin_5ASA	PEN_Remission	0	Schwabing	BA	BA	BA	BA	388	11	BA	168	58.5
+038_ZP0	PEN	Baseline	PEN_Baseline	Remission	Infliximab_MTX	PEN_Remission	0	0.13	7	7.5	4.5	7.3	BA	206	14.8	158.5	51
+039_ZP0-1	PEN	Baseline	PEN_Baseline	Remission	Infliximab	PEN_Remission	7.5	0.1	5	7.3	4.6	13.1	445	1615	14.7	164	55.7
+039_ZP0-2	PEN	Baseline	PEN_Baseline	Remission	Infliximab	PEN_Remission	7.5	0.1	5	7.3	4.6	13.1	445	1615	14.7	164	55.7
+040_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Infliximab_MTX	Non-PEN_Remission	0	0.23	18	6.6	3.9	10.2	122	1390	11.6	127	25
+041_ZP0	PEN	Baseline	PEN_Baseline	Remission	Azathioprin	PEN_Remission	10	1.38	8	7.4	4.6	4.99	494	16	14.6	164.2	48.2
+042_ZP0	Non-PEN	Baseline	Non-PEN_Baseline	Remission	Azathioprin_5ASA_Infliximab	Non-PEN_Remission	0	0.1	11	7.6	4.9	6.2	355	341	13.3	150	44.4
+001_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Infliximab	Non-PEN_Remission	7.5	0.1	7	7.7	4.6	8.5	BA	59	13.9	175.5	65.4
+002_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Mild	Humira	Non-PEN_Mild	17.5	0.23	7	7.7	4.5	9.8	274	507	14.3	167.7	59.2
+003_ZP3	PEN	3_Months	PEN_3 Months	Remission	5ASA_Infliximab_MTX	PEN_Remission	0	0.1	8	7.7	4.3	5.5	440	330	14.5	158	47.5
+004_ZP3	PEN	3_Months	PEN_3 Months	Remission	Azathioprin	PEN_Remission	0	0.3	5	7.2	4.7	4.8	302	BA	14.1	182.5	76.2
+005_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	7.5	0.18	29	7.6	4.1	5.6	310	194	12	156.5	61.6
+006_ZP3	PEN	3_Months	PEN_3 Months	Remission	Azathioprin_Infliximab_MTX	PEN_Remission	7.5	0.38	35	7.7	4.3	7.2	79.9	408	10.7	159	38.3
+007_ZP3	PEN	3_Months	PEN_3 Months	Remission	5ASA	PEN_Remission	0	0.1	15	7.2	4.9	3.6	516	29	13.1	163.45	61.9
+009_ZP3	PEN	3_Months	PEN_3 Months	Remission	Azathioprin_5ASA_Infliximab	PEN_Remission	10	0.1	6	8	4.5	4.8	467	103	13.6	153	36.2
+010_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Infliximab	Non-PEN_Remission	0	0.1	7	7.1	4.8	4	410	34	13.2	163.7	53.9
+011_ZP3-1	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.1	6	BA	BA	7.8	BA	65	15	181	64.2
+011_ZP3-2	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.1	6	BA	BA	7.8	BA	65	15	181	64.2
+012_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.1	11	6.9	4.1	3.8	352	135	11.4	159	73.4
+013_ZP3	PEN	3_Months	PEN_3 Months	Remission	Infliximab	PEN_Remission	0	0.89	19	7.2	4.1	5.9	230	2096	13.1	164.5	44.7
+014_ZP3	PEN	3_Months	PEN_3 Months	Remission	Azathioprin_5ASA_Infliximab	PEN_Remission	0	0.54	BA	8	4.3	8.4	BA	167	12.1	152	50.1
+015_ZP3	PEN	3_Months	PEN_3 Months	Remission	None	PEN_Remission	0	0.1	3	7.7	4.8	9.8	343	117	16.2	186	73.6
+017_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Mild	Infliximab	Non-PEN_Mild	20	2.98	8	7.4	4.6	12	BA	99	14.7	150.2	34.6
+018_ZP3	PEN	3_Months	PEN_3 Months	Remission	Infliximab	PEN_Remission	0	0.1	8	7.6	4.6	8.4	543	1349	13.7	185.2	66.8
+019_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.1	11	8.3	5.1	5.5	BA	284	14.1	154.7	39.7
+022_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Azathioprin_5ASA	Non-PEN_Remission	0	0.47	5	7.35	4.7	6.83	BA	BA	10.6	118.7	25.2
+023_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Azathioprin	Non-PEN_Remission	0	0.5	BA	7.4	4.7	3.7	BA	1678	13.5	175.1	54.3
+025_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.1	1	7.4	4.6	7.2	642	89	15.2	163	53
+027_ZP3	PEN	3_Months	PEN_3 Months	Remission	Azathioprin_5ASA	PEN_Remission	0	0.1	18	7.7	5	9.1	BA	BA	12.3	163.3	49.8
+028_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Azathioprin	Non-PEN_Remission	0	0.1	10	7.3	4.7	6.7	540	BA	12.8	154.6	46.5
+030_ZP3	PEN	3_Months	PEN_3 Months	Remission	Azathioprin	PEN_Remission	0	1.08	2	7.81	4.5	5.14	BA	BA	13.8	180	101.5
+032_ZP3-1	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	1.19	24	6.8	4.3	7.1	BA	1508	14.2	165	66
+032_ZP3-2	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	1.19	24	6.8	4.3	7.1	BA	1508	14.2	165	66
+034_ZP3	PEN	3_Months	PEN_3 Months	BA	Infliximab	PEN_BA	BA	BA	BA	BA	BA	BA	BA	BA	BA	BA	BA
+035_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Azathioprin_5ASA	Non-PEN_Remission	10	BA	BA	BA	BA	BA	BA	BA	BA	155	BA
+037_ZP3	PEN	3_Months	PEN_3 Months	Remission	Azathioprin_5ASA	PEN_Remission	10	BA	BA	BA	BA	BA	BA	BA	BA	169	59.7
+038_ZP3	PEN	3_Months	PEN_3 Months	Remission	Infliximab_MTX	PEN_Remission	0	0.27	6	7.2	4.4	6.4	575	73	14.2	160	54.1
+040_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Infliximab_MTX	Non-PEN_Remission	10	0.18	20	7.2	4.5	8.5	138	269	12.3	129.3	26.6
+041_ZP3	PEN	3_Months	PEN_3 Months	Remission	Azathioprin	PEN_Remission	0	0.95	5	7.03	4.4	4.54	BA	BA	12.5	165	51.4
+042_ZP3	Non-PEN	3_Months	Non-PEN_3 Months	Remission	Azathioprin_5ASA_Infliximab	Non-PEN_Remission	0	0.1	14	7.3	4.6	5.4	248	52	11.8	151	45
+001_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Mild	Infliximab	Non-PEN_Mild	17.5	0.1	6	7.7	4.7	7.2	390	192	13.3	176	65.1
+002_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Humira	Non-PEN_Remission	10	0.2	7	8.3	4.6	8.7	291	1034	14.5	167.7	58
+003_ZP6	PEN	6_Months	PEN_6 Months	Remission	5ASA_Infliximab_MTX	PEN_Remission	0	0.1	7	7.5	4.1	6.8	423	1127	13.4	160.3	51.8
+004_ZP6	PEN	6_Months	PEN_6 Months	Remission	Azathioprin	PEN_Remission	0	0.27	4	7.6	4.7	4.7	289	345	15.2	182.5	76.2
+005_ZP6-1	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	7.5	0.61	43	7.5	4	5.7	320	314	12.1	157	61.5
+005_ZP6-2	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	7.5	0.61	43	7.5	4	5.7	320	314	12.1	157	61.5
+006_ZP6-1	PEN	6_Months	PEN_6 Months	Severe 	Infliximab_MTX	PEN_Severe 	70	2.76	27	8	4.2	7.5	69.7	2100	11.7	160	38.5
+006_ZP6-2	PEN	6_Months	PEN_6 Months	Severe 	Infliximab_MTX	PEN_Severe 	70	2.76	27	8	4.2	7.5	69.7	2100	11.7	160	38.5
+007_ZP6-1	PEN	6_Months	PEN_6 Months	Remission	5ASA	PEN_Remission	0	0.1	13	7.6	4.7	3.3	464	38	13.4	164	61
+007_ZP6-2	PEN	6_Months	PEN_6 Months	Remission	5ASA	PEN_Remission	0	0.1	13	7.6	4.7	3.3	464	38	13.4	164	61
+008_ZP6	PEN	6_Months	PEN_6 Months	Mild	None	PEN_Mild	17.5	0.1	10	7.6	4.3	8.7	428	1263	12.6	156.8	46.2
+009_ZP6	PEN	6_Months	PEN_6 Months	Remission	Azathioprin_5ASA_Infliximab	PEN_Remission	0	0.48	13	8.1	4.3	6.6	438	37	13.1	155.6	38.1
+010_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Infliximab	Non-PEN_Remission	10	0.1	7	7.3	4.8	4	421	58	12.1	163.2	54.2
+011_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.26	4	7.9	4.8	7.9	BA	18	14.6	184.8	70.8
+012_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.1	15	7.3	4.1	5	374	98	10.9	159	72.4
+013_ZP6	PEN	6_Months	PEN_6 Months	Remission	Infliximab	PEN_Remission	7.5	1.33	23	7.7	3.9	6.8	241	2100	12.9	166	43.6
+014_ZP6	PEN	6_Months	PEN_6 Months	Remission	Azathioprin_5ASA_Infliximab	PEN_Remission	7.5	0.66	24	8.1	4.5	6.5	437	59	12.5	154.1	52.6
+015_ZP6	PEN	6_Months	PEN_6 Months	Remission	None	PEN_Remission	0	0.41	7	8	4.8	10.7	353	25	15.3	186	75
+016_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Infliximab_MTX	Non-PEN_Remission	0	0.1	6	7.9	4.7	3.4	353	70	13.2	155.5	38.3
+017_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Infliximab	Non-PEN_Remission	0	0.03	1	6.9	4.5	7.2	253	BA	15.2	152.5	38.4
+018_ZP6	PEN	6_Months	PEN_6 Months	Remission	Infliximab	PEN_Remission	0	0.1	9	7.9	4.5	6.6	432	240	13.6	186	68.15
+019_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Mild	Azathioprin_Infliximab	Non-PEN_Mild	17.5	0.1	21	7.7	42	7.4	BA	383	13.2	157	42
+020_ZP6	PEN	6_Months	PEN_6 Months	Remission	Azathioprin	PEN_Remission	8.5	0.25	25	8.1	4.6	5.1	BA	77	13.4	155.5	62.4
+021_ZP6	PEN	6_Months	PEN_6 Months	Remission	Infliximab_MTX	PEN_Remission	7.5	0.85	9	7.4	4.3	9	268	1002	14	179.9	74.3
+022_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Azathioprin_5ASA	Non-PEN_Remission	0	0.18	BA	7.26	4.8	6.46	193	53	10.4	122.2	25.8
+023_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Azathioprin	Non-PEN_Remission	0	0.3	12	7.7	4.4	8.9	BA	2085	13.7	176.7	55.6
+024_ZP6	PEN	6_Months	PEN_6 Months	Remission	Infliximab_MTX	PEN_Remission	10	0.1	8	6.9	3.9	5	389	50	11.2	160.3	56.3
+025_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.1	4	7.1	4.6	7.3	562	91	15.4	164	53.7
+027_ZP6	PEN	6_Months	PEN_6 Months	Remission	Azathioprin_5ASA	PEN_Remission	0	0.1	12	8	4.7	10.3	479	100	12.5	163.9	50.2
+028_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	BA	Azathioprin	Non-PEN_BA	BA	BA	BA	BA	BA	BA	BA	BA	BA	155	47
+029_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Infliximab	Non-PEN_Remission	0	0.1	9	7.3	4.6	7.9	371	54	13.2	147	35.6
+030_ZP6	PEN	6_Months	PEN_6 Months	Remission	Azathioprin	PEN_Remission	0	0.89	2	7.81	4.5	5.13	BA	1599	13.6	180	102.7
+032_ZP6-1	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.92	20	6.5	3.9	10.1	342	2100	13.3	167.9	67.3
+032_ZP6-2	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.92	20	6.5	3.9	10.1	342	2100	13.3	167.9	67.3
+034_ZP6	PEN	6_Months	PEN_6 Months	Mild	Infliximab	PEN_Mild	17.5	0.1	11	7.4	4.6	BA	208	106	BA	145.8	31.1
+035_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Mild	Azathioprin_5ASA	Non-PEN_Mild	17.5	0.36	19	7.3	4.7	8.9	BA	121	12.5	156	57.3
+036_ZP6	PEN	6_Months	PEN_6 Months	Remission	Infliximab	PEN_Remission	10	0.1	4	7.8	5.2	7.2	515	18	15	183	65.6
+037_ZP6	PEN	6_Months	PEN_6 Months	Remission	Azathioprin_5ASA	PEN_Remission	0	0.17	3	7.25	4.8	4.89	341	BA	BA	169	59.9
+038_ZP6	PEN	6_Months	PEN_6 Months	Remission	Infliximab	PEN_Remission	0	0.18	5	7.1	4.4	6.1	443	28	14.5	161	55
+039_ZP6	PEN	6_Months	PEN_6 Months	Remission	Infliximab	PEN_Remission	10	0.1	6	6.8	4.5	12.1	418	147	12.8	164.7	58
+040_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Infliximab_MTX	Non-PEN_Remission	0	0.1	15	7.3	4.7	6.7	124	268	11.7	130	26.8
+041_ZP6	PEN	6_Months	PEN_6 Months	Remission	Azathioprin	PEN_Remission	0	BA	BA	BA	BA	BA	333	BA	BA	166	51.7
+042_ZP6	Non-PEN	6_Months	Non-PEN_6 Months	Remission	Azathioprin_5ASA_Infliximab	Non-PEN_Remission	0	0.15	13	7.1	4.6	6.2	328	29	12.3	151	45
+001_ZP9	Non-PEN	9_Months	Non-PEN_9 Months	Remission	Infliximab	Non-PEN_Remission	7.5	0.1	8	7.2	4.4	7.2	467	76	13.5	178	65
+002_ZP9	Non-PEN	9_Months	Non-PEN_9 Months	Mild	Humira	Non-PEN_Mild	20	0.15	9	7.9	4.6	9.3	280	304	13.9	167.8	58.4
+003_ZP9	PEN	9_Months	PEN_9 Months	Remission	5ASA_Infliximab_MTX	PEN_Remission	0	0.1	3	7.5	4.3	5.7	429	1185	13.6	163.2	53.34
+006_ZP9	PEN	9_Months	PEN_9 Months	Remission	5ASA_Infliximab_MTX	PEN_Remission	7.5	0.36	23	7.7	4.3	5.3	137	1362	11.3	161.5	40.5
+007_ZP9	PEN	9_Months	PEN_9 Months	Remission	5ASA	PEN_Remission	10	0.1	15	7.5	5	3.2	409	171	13.7	163.6	61.7
+009_ZP9	PEN	9_Months	PEN_9 Months	Remission	Azathioprin_5ASA_Infliximab	PEN_Remission	10	0.1	1	7.7	4.5	4.5	BA	22	13.4	158	38.7
+011_ZP9-1	Non-PEN	9_Months	Non-PEN_9 Months	Remission	Infliximab	Non-PEN_Remission	0	0.61	3	7.3	4.5	7.1	508	58	13.3	183	70
+011_ZP9-2	Non-PEN	9_Months	Non-PEN_9 Months	Remission	Infliximab	Non-PEN_Remission	0	0.61	3	7.3	4.5	7.1	508	58	13.3	183	70
+012_ZP9	Non-PEN	9_Months	Non-PEN_9 Months	Remission	Infliximab	Non-PEN_Remission	0	0.1	11	6.7	4.1	5	337	228	11.2	159	71.8
+013_ZP9	PEN	9_Months	PEN_9 Months	Remission	Infliximab_MTX	PEN_Remission	0	0.18	11	7	4.3	5	331	400	12.5	166.2	45.6
+014_ZP9	PEN	9_Months	PEN_9 Months	Remission	Azathioprin_5ASA_Infliximab	PEN_Remission	0	0.51	BA	8.1	4	7.5	BA	17	13.7	158	55
+016_ZP9	Non-PEN	9_Months	Non-PEN_9 Months	Remission	Infliximab_MTX	Non-PEN_Remission	10	0.1	4	7	4.7	4.8	358	15	12.5	158.2	40.3
+017_ZP9	Non-PEN	9_Months	Non-PEN_9 Months	Remission	Infliximab	Non-PEN_Remission	0	0.1	1	7	4.6	6.2	198	82	15	155.3	38.7
+018_ZP9	PEN	9_Months	PEN_9 Months	Remission	Infliximab	PEN_Remission	0	0.1	10	7.8	4.3	BA	392	449	BA	186.5	67.6
+019_ZP9	Non-PEN	9_Months	Non-PEN_9 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	7.5	0.1	35	8.8	4.7	9.2	364	1175	14.1	159.1	42.8
+020_ZP9-1	PEN	9_Months	PEN_9 Months	Mild	Azathioprin	PEN_Mild	18.5	0.25	35	7.9	4.6	5.5	383	29	12.5	BA	61.6
+020_ZP9-2	PEN	9_Months	PEN_9 Months	Mild	Azathioprin	PEN_Mild	18.5	0.25	35	7.9	4.6	5.5	383	29	12.5	BA	61.6
+021_ZP9-1	PEN	9_Months	PEN_9 Months	Severe 	Infliximab_MTX	PEN_Severe 	52.5	1.41	11	7.4	4.6	10.4	BA	1451	13.8	179.7	72.4
+021_ZP9-2	PEN	9_Months	PEN_9 Months	Severe 	Infliximab_MTX	PEN_Severe 	52.5	1.41	11	7.4	4.6	10.4	BA	1451	13.8	179.7	72.4
+022_ZP9	Non-PEN	9_Months	Non-PEN_9 Months	Remission	Azathioprin_5ASA	Non-PEN_Remission	0	0.26	BA	7.51	4.7	6.42	BA	BA	10.4	123.1	26.4
+023_ZP9	Non-PEN	9_Months	Non-PEN_9 Months	Remission	Azathioprin	Non-PEN_Remission	0	0.68	17	7.6	4.8	6.5	447	BA	14.1	178.4	58.3
+024_ZP9	PEN	9_Months	PEN_9 Months	Remission	Infliximab_MTX	PEN_Remission	10	0.1	12	6.9	4.2	6.8	377	103	9.3	161	58.2
+025_ZP9	Non-PEN	9_Months	Non-PEN_9 Months	Remission	Infliximab	Non-PEN_Remission	0	0.1	6	7.3	4.7	9.5	576	174	15.5	166.5	54.8
+026_ZP9	Non-PEN	9_Months	Non-PEN_9 Months	Remission	BA	Non-PEN_Remission	0	BA	BA	BA	BA	BA	BA	BA	BA	132.8	32.8
+028_ZP9	Non-PEN	9_Months	Non-PEN_9 Months	Remission	Azathioprin	Non-PEN_Remission	0	0.1	5	7.3	5.1	6.1	604	51	12.9	157.2	48.5
+029_ZP9	Non-PEN	9_Months	Non-PEN_9 Months	Remission	Infliximab	Non-PEN_Remission	0	0.1	11	7.5	4.8	6.7	342	22	15.4	148.8	39.3
+030_ZP9	PEN	9_Months	PEN_9 Months	Remission	Azathioprin	PEN_Remission	0	0.82	2	7.92	4.5	5.15	BA	504	13.8	182	108.7
+032_ZP9	Non-PEN	9_Months	Non-PEN_9 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	0	0.85	24	6.8	4.1	9.8	359	409	13.5	170	71.2
+039_ZP9	PEN	9_Months	PEN_9 Months	Remission	Infliximab	PEN_Remission	10	0.1	5	7.2	4.9	9	BA	1964	13.7	164.7	58.2
+001_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Infliximab	Non-PEN_Remission	7.5	0.1	7	8	5.1	8.4	438	132	13.9	178.2	68
+002_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Mild	Humira	Non-PEN_Mild	20	0.21	7	7.4	4.4	9.8	BA	BA	13.4	168	59
+003_ZP12	PEN	12_Months	PEN_12 Months	Remission	5ASA_Infliximab_MTX	PEN_Remission	0	0.1	6	7.3	4.5	5.1	296	1330	13.6	164	55.3
+005_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	7.5	0.57	43	7.3	4.3	4.8	BA	57	11.7	157.6	60
+006_ZP12	PEN	12_Months	PEN_12 Months	Remission	5ASA_Infliximab_MTX	PEN_Remission	7.5	0.1	12	7	4.6	6	121	95	10.6	163.8	43
+007_ZP12	PEN	12_Months	PEN_12 Months	Remission	5ASA	PEN_Remission	0	0.1	14	7	4.9	2.3	405	20	12.2	163.6	64.7
+008_ZP12	PEN	12_Months	PEN_12 Months	Mild	None	PEN_Mild	25	0.74	23	6.7	3.8	8.5	202	4335	11.3	159	42.1
+010_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Infliximab	Non-PEN_Remission	0	0.18	12	7.1	4.9	4.4	341	604	11.3	164	53.5
+011_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Infliximab	Non-PEN_Remission	0	0.52	1	7.6	4.8	9.8	397	BA	14.5	185	75
+012_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Infliximab	Non-PEN_Remission	0	0.1	8	6.5	4.1	4.9	297	BA	11.3	159	71
+013_ZP12	PEN	12_Months	PEN_12 Months	Remission	Infliximab_MTX	PEN_Remission	7.5	0.1	11	7	4.3	5.9	359	58	12.9	168	48.6
+014_ZP12	PEN	12_Months	PEN_12 Months	Remission	Azathioprin_5ASA_Infliximab	PEN_Remission	7.5	0.32	27	7.8	4.8	9.9	BA	115	12.8	160.2	58.2
+015_ZP12	PEN	12_Months	PEN_12 Months	Remission	None	PEN_Remission	0	0.34	3	7.6	5.1	13.7	BA	41	16	186	76.3
+016_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Infliximab_MTX	Non-PEN_Remission	0	0.1	4	7.1	4.7	4.5	386	BA	12.4	159.5	41
+017_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Infliximab	Non-PEN_Remission	0	0.1	1	7.2	4.9	7.62	225	65	14.1	156.1	39.3
+018_ZP12	PEN	12_Months	PEN_12 Months	Remission	Infliximab	PEN_Remission	0	0.15	9	7.8	1.7	7.6	376	484	13.5	186	72
+019_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Azathioprin_Infliximab	Non-PEN_Remission	7.5	0.1	25	7.9	4.5	6.3	416	625	13.1	160.1	44.5
+020_ZP12	PEN	12_Months	PEN_12 Months	Mild	Azathioprin	PEN_Mild	17.5	0.18	31	7.2	4.6	6.3	333	BA	11.9	157	75.7
+021_ZP12	PEN	12_Months	PEN_12 Months	Remission	Infliximab_MTX	PEN_Remission	10	0.77	11	7.6	4.8	6.6	300	988	14.5	180	72.7
+022_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Azathioprin_5ASA	Non-PEN_Remission	0	BA	BA	BA	BA	BA	BA	BA	BA	123.1	26.4
+023_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Azathioprin	Non-PEN_Remission	0	0.43	BA	7.1	4.7	6.3	BA	405	12.6	178.9	60
+024_ZP12-1	PEN	12_Months	PEN_12 Months	Remission	Infliximab_MTX	PEN_Remission	0	0.1	8	6.6	4.1	7.1	347	BA	12.3	161.5	61
+024_ZP12-2	PEN	12_Months	PEN_12 Months	Remission	Infliximab_MTX	PEN_Remission	0	0.1	8	6.6	4.1	7.1	347	BA	12.3	161.5	61
+025_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Infliximab	Non-PEN_Remission	0	0.1	1	6.9	4.8	7.5	498	BA	14.3	167.5	55.6
+026_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	BA	Non-PEN_Remission	0	BA	BA	BA	BA	BA	BA	BA	BA	135	32.2
+027_ZP12	PEN	12_Months	PEN_12 Months	Remission	Azathioprin_5ASA	PEN_Remission	0	0.1	42	7.4	4.6	7.3	416	319	11.6	164.1	50.6
+028_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Azathioprin	Non-PEN_Remission	0	0.1	16	7	4.7	7.3	380	BA	11.3	157.7	49
+029_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Infliximab	Non-PEN_Remission	0	0.1	9	7.4	4.8	6.6	488	82	13.3	151	41
+030_ZP12	PEN	12_Months	PEN_12 Months	Remission	Azathioprin	PEN_Remission	0	0.39	1	8.16	4.7	4.34	450	26	14.8	182	106.4
+032_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Infliximab	Non-PEN_Remission	0	0.5	14	7.2	4.2	12	418	483	14	170	71.2
+034_ZP12	PEN	12_Months	PEN_12 Months	Remission	Infliximab	PEN_Remission	0	0.11	12	8.3	5.2	19.7	376	26	13.5	152	34
+035_ZP12	Non-PEN	12_Months	Non-PEN_12 Months	Remission	Azathioprin_5ASA	Non-PEN_Remission	7.5	0.34	30	7.6	5.3	5.52	220	71	12.7	157.2	49.5

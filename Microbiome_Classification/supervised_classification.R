@@ -8,10 +8,10 @@
 setwd("C:/Users/PhD/Supervised_Classification/Microbiome_Classification")  #<--- CHANGE ACCORDINGLY !!!
 
 # Enter name of OTU table file: 
-input_otu_table <- "merged_otu.tab"        #<--- CHANGE ACCORDINGLY !!!
+input_otu_table <- "kinetic_otu.txt"        #<--- CHANGE ACCORDINGLY !!!
 
 # Enter name of mapping file: 
-mapping_file <- "merged_map.tab"         #<--- CHANGE ACCORDINGLY !!!
+mapping_file <- "mapping file_WHOLE.tab"         #<--- CHANGE ACCORDINGLY !!!
 # Please select model.
 # 0 = Random-Forest Model (default) - general purpose model
 # 1 = Support Vector Machine - simple model, useful for classifying data which can be linearly separated
@@ -28,7 +28,7 @@ cv <- 0       #<--- CHANGE ACCORDINGLY !!!
 
 # Please give the column where the categorical variable is found 
 
-col_name <- "Phenotype"        #<--- CHANGE ACCORDINGLY !!!   
+col_name <- "Intervention"        #<--- CHANGE ACCORDINGLY !!!   
 
 
 ######                  NO CHANGES REQUIRED BELOW THIS LINE                 ######
@@ -63,6 +63,13 @@ flag <- all(as.logical(lib))
 
 otu <- read.table(input_otu_table, sep="\t", header=T, row.names=1, stringsAsFactors=TRUE, comment.char="", check.names=FALSE)
 mapping <- read.table(mapping_file, sep="\t", header=T, row.names=1, stringsAsFactors=TRUE, comment.char="", check.names=FALSE)
+
+# check if taxonomy column still present in otu table 
+check_otu <- function(tab){
+  if (typeof(tab[-1]) != "integer" ) {
+    
+  }
+}
 
 # scale pre-preprocessed training data and merge phenotype column from metadata
 
