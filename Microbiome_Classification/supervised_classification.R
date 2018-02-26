@@ -76,7 +76,7 @@ set.seed(42)
 
 
 #split into training and test 
-trainIndex = createDataPartition(otu_table_scaled_labels$Phenotype, 
+trainIndex = createDataPartition(otu_table_scaled_labels[[col_name]], 
                                  p=0.7, list=FALSE,times=1)
 training = otu_table_scaled_labels[trainIndex,]
 test = otu_table_scaled_labels[-trainIndex,]
@@ -127,7 +127,7 @@ if (model == 0) {
       importance_plot
       dev.off()
       if (cv == 0 | 1) {
-            
+             
       } else if (cv == 2) {
         
       }
