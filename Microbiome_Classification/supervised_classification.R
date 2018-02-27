@@ -8,10 +8,10 @@
 setwd("C:/Users/PhD/Supervised_Classification/Microbiome_Classification")  #<--- CHANGE ACCORDINGLY !!!
 
 # Enter name of OTU table file: 
-input_otu_table <- "kinetic_otu.txt"        #<--- CHANGE ACCORDINGLY !!!
+input_otu_table <- "merged_otu.tab.txt"        #<--- CHANGE ACCORDINGLY !!!
 
 # Enter name of mapping file: 
-mapping_file <- "mapping file_WHOLE.tab"         #<--- CHANGE ACCORDINGLY !!!
+mapping_file <- "merged_map.tab.tab"         #<--- CHANGE ACCORDINGLY !!!
 # Please select model.
 # 0 = Random-Forest Model (default) - general purpose model
 # 1 = Support Vector Machine - simple model, useful for classifying data which can be linearly separated
@@ -64,12 +64,6 @@ flag <- all(as.logical(lib))
 otu <- read.table(input_otu_table, sep="\t", header=T, row.names=1, stringsAsFactors=TRUE, comment.char="", check.names=FALSE)
 mapping <- read.table(mapping_file, sep="\t", header=T, row.names=1, stringsAsFactors=TRUE, comment.char="", check.names=FALSE)
 
-# check if taxonomy column still present in otu table 
-check_otu <- function(tab){
-  if (typeof(tab[-1]) != "integer" ) {
-    
-  }
-}
 
 # scale pre-preprocessed training data and merge phenotype column from metadata
 
@@ -118,6 +112,7 @@ if (model == 0) {
                      tuneGrid=tunegrid, trControl=fit_ctrl)
       importance <- varImp(RF_cv)
       predictions <- predict(RF_cv, newdata = X_test)
+      prob <- predict(RF_cv, newdata= X_test, type="prob")
       samples <- row.names(X_test)
       pred_df <- data.frame(samples, actual, predictions) 
       print(pred_df)
@@ -134,9 +129,12 @@ if (model == 0) {
       importance_plot
       dev.off()
       if (cv == 0 | 1) {
-             
+          rf_pred = prediction(prob, X_test)
+          rf.perf = performance(rf.pred,"tpr","fpr")
+          plot(rf.perf,main="ROC Curve for Random Forest",col=2,lwd=2)
+          abline(a=0,b=1,lwd=2,lty=2,col="gray")  
       } else if (cv == 2) {
-        
+        print("Sorry LOOCV support is not yet available")
       }
       write.table(importance, file="importance.tab", sep="\t")
       write.table(pred_df, file = "random_forest_predictions.tab", sep="\t", row.names = FALSE) # output to folders
