@@ -8,10 +8,10 @@
 setwd("C:/Users/PhD/Supervised_Classification/Microbiome_Classification")  #<--- CHANGE ACCORDINGLY !!!
 
 # Enter name of OTU table file: 
-input_otu_table <- "merged_otu.tab.txt"        #<--- CHANGE ACCORDINGLY !!!
+input_otu_table <- "merged_otu.tab"        #<--- CHANGE ACCORDINGLY !!!
 
 # Enter name of mapping file: 
-mapping_file <- "merged_map.tab.tab"         #<--- CHANGE ACCORDINGLY !!!
+mapping_file <- "merged_map.tab"         #<--- CHANGE ACCORDINGLY !!!
 # Please select model.
 # 0 = Random-Forest Model (default) - general purpose model
 # 1 = Support Vector Machine - simple model, useful for classifying data which can be linearly separated
@@ -28,7 +28,7 @@ cv <- 0       #<--- CHANGE ACCORDINGLY !!!
 
 # Please give the column where the categorical variable is found 
 
-col_name <- "Intervention"        #<--- CHANGE ACCORDINGLY !!!   
+col_name <- "Phenotype"        #<--- CHANGE ACCORDINGLY !!!   
 
 
 ######                  NO CHANGES REQUIRED BELOW THIS LINE                 ######
