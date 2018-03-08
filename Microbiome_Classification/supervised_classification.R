@@ -129,7 +129,7 @@ if (model == 0) {
       importance_plot
       dev.off()
       if (cv == 0 | 1) {
-          rf_pred = prediction(prob, X_test)
+          rf_pred = prediction(predictions, actual)
           rf.perf = performance(rf.pred,"tpr","fpr")
           plot(rf.perf,main="ROC Curve for Random Forest",col=2,lwd=2)
           abline(a=0,b=1,lwd=2,lty=2,col="gray")  
