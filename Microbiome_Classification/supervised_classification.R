@@ -125,7 +125,7 @@ if (model == 0) {
       pdf("feature_importance_top10.pdf", width = 10, height = 5)
       importance_plot <- barplot(importance_sorted[1:10, "Overall"], names.arg=importance_sorted[1:10, "OTU"], 
                                  ylab="Variable Importance", las=2, ylim=c(0,100), col = "darkblue",
-                                 main="Feature Importance (Top 10)") 
+                                 main="Feature Importance (Top 10)")
       importance_plot
       dev.off()
       if (cv == 0 | 1) {
