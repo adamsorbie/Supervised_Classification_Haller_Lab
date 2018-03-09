@@ -128,8 +128,9 @@ if (model == 0) {
                                  main="Feature Importance (Top 10)")
       importance_plot
       dev.off()
+      true_classes <- as.data.frame(test[ , ncol(test)])
       if (cv == 0 | 1) {
-          rf_pred = prediction(predictions, actual)
+          rf_pred = prediction(pred_df$predictions, true_classes)
           rf.perf = performance(rf.pred,"tpr","fpr")
           plot(rf.perf,main="ROC Curve for Random Forest",col=2,lwd=2)
           abline(a=0,b=1,lwd=2,lty=2,col="gray")  
