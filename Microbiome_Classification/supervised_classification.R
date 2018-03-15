@@ -40,7 +40,7 @@ col_name <- "Phenotype"        #<--- CHANGE ACCORDINGLY !!!
 ###################       Load all required libraries     ########################
 
 # Check if required packages are already installed, and install if missing
-packages <-c("caret", "ROCR", "dplyr", "xgboost") 
+packages <-c("caret", "ROCR", "dplyr", "xgboost", "pROC") 
 
 # Function to check whether the package is installed
 InsPack <- function(pack)
@@ -70,7 +70,17 @@ mapping <- read.table(mapping_file, sep="\t", header=T, row.names=1, stringsAsFa
 otu_table_scaled <- scale(otu, center = TRUE, scale = TRUE)
 
 otu_table_scaled_labels <- data.frame(t(otu_table_scaled))  
-otu_table_scaled_labels[col_name] <- mapping[rownames(otu_table_scaled_labels), col_name] 
+otu_table_scaled_labels[col_name] <- mapping[rownames(otu_table_scaled_labels), col_name]
+
+# convert category to continous variable 
+cols <- as.factor(otu_table_scaled_labels$Phenotype) # make phenotype dynamic, also needs to be some way of informing user which is which
+levels(cols) <- 1:length(levels(cols))
+cols <- as.numeric(cols)
+cols <- as.factor(cols)
+print(cols)
+otu_table_scaled_labels$Phenotype <- cols
+#otu_table_scaled_labels$Phenotype <- as.integer(as.factor(otu_table_scaled_labels$Phenotype))
+
 
 # set random seed to 42 
 set.seed(42)
@@ -129,8 +139,9 @@ if (model == 0) {
       importance_plot
       dev.off()
       true_classes <- as.data.frame(test[ , ncol(test)])
+      model_predictions <- as.data.frame(pred_df$predictions)
       if (cv == 0 | 1) {
-          rf_pred = prediction(pred_df$predictions, true_classes)
+          rf_pred = prediction(as.numeric(model_predictions, true_classes))
           rf.perf = performance(rf.pred,"tpr","fpr")
           plot(rf.perf,main="ROC Curve for Random Forest",col=2,lwd=2)
           abline(a=0,b=1,lwd=2,lty=2,col="gray")  
