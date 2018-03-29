@@ -92,6 +92,7 @@ y_train <- training[ , ncol(training)]
 X_test <- test[,1:(ncol(test)-1)] 
 # for comparing model predictions against actual categories 
 actual <- as.character(test[ , ncol(test)])
+actual <- as.numeric(actual)
 
 # cross validation method  
 if (cv == 0) {
@@ -137,12 +138,13 @@ write.table(pred_df, file = "random_forest_predictions.tab", sep="\t", row.names
 write.table(result$table, file = "confusion_matrix.tab", sep="\t", row.names = FALSE)
 write.table(metrics, file="metrics.tab", sep="\t", row.names = FALSE)
 if (cv == 0 | 1) {
-         #rf_pred = prediction(as.numeric(model_predictions, true_classes))
-          #rf.perf = performance(rf.pred,"tpr","fpr")
-         # plot(rf.perf,main="ROC Curve for Random Forest",col=2,lwd=2)
-         # abline(a=0,b=1,lwd=2,lty=2,col="gray")  
+    roc_rf <- roc(actual, prob$`1`)
+    pdf("roc_curve.pdf")
+    roc_plot <- plot(roc_rf, col = "blue")
+    roc_plot 
+    dev.off()
 } else if (cv == 2) {
-      #  print("Sorry LOOCV support is not yet available")
+      print("Sorry LOOCV support is not yet available")
 }
 
 
