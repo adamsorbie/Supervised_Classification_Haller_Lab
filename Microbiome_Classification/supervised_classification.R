@@ -1,4 +1,4 @@
-##############################################################################################################################################
+##################################################################################################################################################
 # This script performs supervised classification of a normalised OTU table. 
 # Version: 0.9 
 # 2018-02-05  Author: Adam Sorbie 
@@ -13,11 +13,11 @@ input_otu_table <- "merged_otu.tab"        #<--- CHANGE ACCORDINGLY !!!
 # Enter name of mapping file: 
 mapping_file <- "merged_map.tab"         #<--- CHANGE ACCORDINGLY !!!
 # Please select model.
-# 0 = Random-Forest Model (default) - general purpose model
-# 1 = Support Vector Machine - simple model, useful for classifying data which can be linearly separated
-# 2 = eXtreme Gradient Boosting - may offer increased accuracy over Random-Forest, if RF results are not satisfactory, try this model  
+# 0 = Random-Forest Model (default) - general purpose model, outputs feature importance as well as predictions
+# 1 = Support Vector Machine - simple model, useful for classifying data which can be linearly separated, predictions only
+# 2 = eXtreme Gradient Boosting - may offer increased accuracy over Random-Forest in some cases, also outputs feature importance and predictions  
  
-model <- 0      #<--- CHANGE ACCORDINGLY !!!
+model <- 1     #<--- CHANGE ACCORDINGLY !!!
 
 # Please select cross-validation method: 
 # 0 = k-fold Cross-validation (default) -
@@ -31,13 +31,13 @@ cv <- 0       #<--- CHANGE ACCORDINGLY !!!
 col_name <- "Phenotype"        #<--- CHANGE ACCORDINGLY !!!   
 
 
-######                  NO CHANGES REQUIRED BELOW THIS LINE                 ######
+#############################                           NO CHANGES REQUIRED BELOW THIS LINE                         #############################        
 
-##################################################################################
-######                             Main Script                              ###### 
-##################################################################################
+##################################################################################################################################################
+###############################################                   Main Script                      ###############################################  
+##################################################################################################################################################
 
-###################       Load all required libraries     ########################
+###############################################       Load all required libraries       ##########################################################
 
 # Check if required packages are already installed, and install if missing
 packages <-c("caret", "ROCR", "dplyr", "xgboost", "pROC") 
@@ -58,7 +58,7 @@ lib <- lapply(packages, require, character.only = TRUE)
 
 # Check if it was possible to install all required libraries
 flag <- all(as.logical(lib))
-
+##################################################################################################################################################
 # read data 
 
 otu <- read.table(input_otu_table, sep="\t", header=T, row.names=1, stringsAsFactors=TRUE, comment.char="", check.names=FALSE)
@@ -73,12 +73,12 @@ otu_table_scaled_labels <- data.frame(t(otu_table_scaled))
 otu_table_scaled_labels[col_name] <- mapping[rownames(otu_table_scaled_labels), col_name]
 
 # convert category to continous variable 
-cols <- as.factor(otu_table_scaled_labels$Phenotype) # make phenotype dynamic, also needs to be some way of informing user which is which
+cols <- as.factor(otu_table_scaled_labels[col_name]) # make phenotype dynamic, also needs to be some way of informing user which is which
 levels(cols) <- 1:length(levels(cols))
 cols <- as.numeric(cols)
 cols <- as.factor(cols)
 print(cols)
-otu_table_scaled_labels$Phenotype <- cols
+otu_table_scaled_labels[col_name] <- cols
 #otu_table_scaled_labels$Phenotype <- as.integer(as.factor(otu_table_scaled_labels$Phenotype))
 
 
@@ -140,42 +140,73 @@ if (model == 0) {
       dev.off()
       true_classes <- as.data.frame(test[ , ncol(test)])
       model_predictions <- as.data.frame(pred_df$predictions)
-      if (cv == 0 | 1) {
-          rf_pred = prediction(as.numeric(model_predictions, true_classes))
-          rf.perf = performance(rf.pred,"tpr","fpr")
-          plot(rf.perf,main="ROC Curve for Random Forest",col=2,lwd=2)
-          abline(a=0,b=1,lwd=2,lty=2,col="gray")  
-      } else if (cv == 2) {
-        print("Sorry LOOCV support is not yet available")
-      }
       write.table(importance, file="importance.tab", sep="\t")
       write.table(pred_df, file = "random_forest_predictions.tab", sep="\t", row.names = FALSE) # output to folders
       write.table(result$table, file = "confusion_matrix.tab", sep="\t", row.names = FALSE)
       write.table(metrics, file="metrics.tab", sep="\t", row.names = FALSE)
-} else if (model == 1) {
+      if (cv == 0 | 1) {
+         #rf_pred = prediction(as.numeric(model_predictions, true_classes))
+          #rf.perf = performance(rf.pred,"tpr","fpr")
+         # plot(rf.perf,main="ROC Curve for Random Forest",col=2,lwd=2)
+         # abline(a=0,b=1,lwd=2,lty=2,col="gray")  
+     # } else if (cv == 2) {
+      #  print("Sorry LOOCV support is not yet available")
+
+      
+} 
+}else if (model == 1) {
       svm_cv <- train(X_train, y_train, method="svmLinear", trControl= fit_ctrl ) #tunegrid 
+      tunegrid <- expand.grid()
+      svm.tune <- train(X_train, y_train, method="svmLinear", tuneLength=10)
+      print(svm.tune)
       predictions <- predict(svm_cv, newdata = X_test)
       samples <- row.names(X_test)
       pred_df <- data.frame(samples, actual, predictions) 
       print(pred_df)
       pred_df$Correct <- pred_df$actual == pred_df$predictions
       result <- confusionMatrix(predictions, actual)
+      metrics <- data.frame(cbind(t(result$positive),t(result$byClass), t(result$overall)))
+      write.table(pred_df, file = "random_forest_predictions.tab", sep="\t", row.names = FALSE) # output to folders
+      write.table(result$table, file = "confusion_matrix.tab", sep="\t", row.names = FALSE)
+      write.table(metrics, file="metrics.tab", sep="\t", row.names = FALSE)
       print(svm_cv)
 } else if (model == 2) {
       Xgb_cv <- train(X_train, y_train, method="xgbTree", trControl= fit_ctrl)
+      importance <- varImp(Xgb_cv)
       predictions <- predict(Xgb_cv, newdata= X_test)
+      prob <- predict(Xgb_cv, newdata= X_test, type="prob")
       samples <- row.names(X_test)
       pred_df <- data.frame(samples, actual, predictions) 
       print(pred_df)
       pred_df$Correct <- pred_df$actual == pred_df$predictions
       result <- confusionMatrix(predictions, actual)
+      metrics <- data.frame(cbind(t(result$positive),t(result$byClass), t(result$overall)))
+      importance <- importance$importance
+      otu_names = cbind(OTU=row.names(importance), importance) # clean this code up and make sure it works in all cases (drop index also)
+      importance_sorted <- otu_names[order(-otu_names$Overall), , drop=FALSE]
+      pdf("feature_importance_top10.pdf", width = 10, height = 5)
+      importance_plot <- barplot(importance_sorted[1:10, "Overall"], names.arg=importance_sorted[1:10, "OTU"], 
+                                 ylab="Variable Importance", las=2, ylim=c(0,100), col = "darkblue",
+                                 main="Feature Importance (Top 10)")
+      importance_plot
+      dev.off()
       print(Xgb_cv)
+      write.table(importance, file="importance.tab", sep="\t")
+      write.table(pred_df, file = "random_forest_predictions.tab", sep="\t", row.names = FALSE) # output to folders
+      write.table(result$table, file = "confusion_matrix.tab", sep="\t", row.names = FALSE)
+      write.table(metrics, file="metrics.tab", sep="\t", row.names = FALSE)
 } else { 
       print("Error, please enter a valid selection: 
             0 = Random Forest
             1 = SVM
             2 = eXtreme gradient boosting")}
   
+
+
+
+
+
+
 
 
 
