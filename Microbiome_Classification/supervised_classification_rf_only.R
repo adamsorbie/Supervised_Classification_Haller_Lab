@@ -55,8 +55,10 @@ flag <- all(as.logical(lib))
 ##################################################################################################################################################
 # read data 
 
-otu <- read.table(input_otu_table, sep="\t", header=T, row.names=1, stringsAsFactors=TRUE, comment.char="", check.names=FALSE)
-mapping <- read.table(mapping_file, sep="\t", header=T, row.names=1, stringsAsFactors=TRUE, comment.char="", check.names=FALSE)
+otu <- read.table(input_otu_table, sep="\t", header=T, row.names=1, stringsAsFactors=TRUE, 
+                  comment.char="", check.names=FALSE)
+mapping <- read.table(mapping_file, sep="\t", header=T, row.names=1, stringsAsFactors=TRUE, 
+                      comment.char="", check.names=FALSE)
 
 
 # scale pre-preprocessed training data and merge phenotype column from metadata
@@ -67,13 +69,12 @@ otu_table_scaled_labels <- data.frame(t(otu_table_scaled))
 otu_table_scaled_labels[col_name] <- mapping[rownames(otu_table_scaled_labels), col_name]
 
 # convert category to continous variable 
-cols <- as.factor(otu_table_scaled_labels[[col_name]]) # make phenotype dynamic, also needs to be some way of informing user which is which
-levels(cols) <- 1:length(levels(cols))
-cols <- as.numeric(cols)
+cols_factor <- as.factor(otu_table_scaled_labels[[col_name]]) 
+levels(cols_factor) <- 1:length(levels(cols_factor))
+cols <- as.numeric(cols_factor)
 cols <- as.factor(cols)
 print(cols)
 otu_table_scaled_labels[[col_name]] <- cols
-#otu_table_scaled_labels$Phenotype <- as.integer(as.factor(otu_table_scaled_labels$Phenotype))
 
 
 # set random seed to 42 
