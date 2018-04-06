@@ -17,7 +17,7 @@ mapping_file <- "merged_map.tab"         #<--- CHANGE ACCORDINGLY !!!
 # 1 = Support Vector Machine - simple model, useful for classifying data which can be linearly separated, predictions only
 # 2 = eXtreme Gradient Boosting - may offer increased accuracy over Random-Forest in some cases, also outputs feature importance and predictions  
  
-model <- 1     #<--- CHANGE ACCORDINGLY !!!
+model <- 0     #<--- CHANGE ACCORDINGLY !!!
 
 # Please select cross-validation method: 
 # 0 = k-fold Cross-validation (default) -
@@ -72,13 +72,16 @@ otu_table_scaled <- scale(otu, center = TRUE, scale = TRUE)
 otu_table_scaled_labels <- data.frame(t(otu_table_scaled))  
 otu_table_scaled_labels[col_name] <- mapping[rownames(otu_table_scaled_labels), col_name]
 
-# convert category to continous variable 
+# convert categorical to continous variables
+categorical_variables <- otu_table_scaled_labels[col_name]
 cols <- as.factor(otu_table_scaled_labels[col_name]) # make phenotype dynamic, also needs to be some way of informing user which is which
 levels(cols) <- 1:length(levels(cols))
 cols <- as.numeric(cols)
 cols <- as.factor(cols)
 print(cols)
 otu_table_scaled_labels[col_name] <- cols
+mapping <- data.frame(categorical_variables, otu_table_scaled_labels$Phenotype)
+
 #otu_table_scaled_labels$Phenotype <- as.integer(as.factor(otu_table_scaled_labels$Phenotype))
 
 

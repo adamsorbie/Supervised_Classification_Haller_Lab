@@ -69,12 +69,14 @@ otu_table_scaled_labels <- data.frame(t(otu_table_scaled))
 otu_table_scaled_labels[col_name] <- mapping[rownames(otu_table_scaled_labels), col_name]
 
 # convert category to continous variable 
+categorical_variables <- otu_table_scaled_labels[col_name]
 cols_factor <- as.factor(otu_table_scaled_labels[[col_name]]) 
 levels(cols_factor) <- 1:length(levels(cols_factor))
 cols <- as.numeric(cols_factor)
 cols <- as.factor(cols)
 print(cols)
 otu_table_scaled_labels[[col_name]] <- cols
+mapping <- data.frame(categorical_variables, otu_table_scaled_labels$Phenotype)
 
 
 # set random seed to 42 
