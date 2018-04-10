@@ -120,6 +120,7 @@ importance <- varImp(RF_cv)
 predictions <- predict(RF_cv, newdata = X_test)
 prob <- predict(RF_cv, newdata= X_test, type="prob")
 samples <- row.names(X_test)
+mapping_test <- subset(mapping, rownames(mapping) %in% samples)
 pred_df <- data.frame(samples, actual, predictions) 
 print(pred_df)
 pred_df$Correct <- pred_df$actual == pred_df$predictions
