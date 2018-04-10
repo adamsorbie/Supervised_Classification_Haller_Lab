@@ -34,7 +34,7 @@ col_name <- "Phenotype"        #<--- CHANGE ACCORDINGLY !!!
 ###############################################       Load all required libraries       ##########################################################
 
 # Check if required packages are already installed, and install if missing
-packages <-c("caret", "ROCR", "dplyr", "xgboost", "pROC") 
+packages <-c("caret", "dplyr", "xgboost", "pROC") 
 
 # Function to check whether the package is installed
 InsPack <- function(pack)
