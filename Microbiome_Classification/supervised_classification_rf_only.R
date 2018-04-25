@@ -1,6 +1,6 @@
 ##################################################################################################################################################
 # This script performs supervised classification of a normalised OTU table. 
-# Version: 0.9 
+# Version: 0.9.0 
 # 2018-02-05  Author: Adam Sorbie 
 #
 #  Please set the directory of the script as the working folder (e.g C:/studyname/NGS-Data/Microbiome_classification)
@@ -77,7 +77,19 @@ cols <- as.factor(cols)
 print(cols)
 otu_table_scaled_labels[[col_name]] <- cols
 mapping <- data.frame(categorical_variables, otu_table_scaled_labels$Phenotype)
+colnames(mapping) <- c("Original", "Encoded")
 
+# function to de-encode categorical variables 
+deencoder <- function(df,mapping,col_1, col_2){
+  if(missing(col_2)) {
+    df[,col_1] <- mapping$Original[match(df[,col_1], mapping$Encoded)]
+    return(df)
+  } else {
+    df[,col_1] <- mapping$Original[match(df[,col_1], mapping$Encoded)]
+    df[,col_2] <- mapping$Original[match(df[,col_2], mapping$Encoded)]
+    return(df)
+  }
+}
 
 # set random seed to 42 
 set.seed(42)
@@ -122,7 +134,7 @@ prob <- predict(RF_cv, newdata= X_test, type="prob")
 samples <- row.names(X_test)
 mapping_test <- subset(mapping, rownames(mapping) %in% samples)
 pred_df <- data.frame(samples, actual, predictions) 
-print(pred_df)
+pred_df <- deencoder(pred_df, mapping, "actual", "predictions")
 pred_df$Correct <- pred_df$actual == pred_df$predictions
 result <- confusionMatrix(predictions, actual)
 metrics <- data.frame(cbind(t(result$positive),t(result$byClass), t(result$overall)))
