@@ -11,7 +11,7 @@ setwd("C:/Users/PhD/Supervised_Classification/Microbiome_Classification")  #<---
 input_otu_table <- "merged_otu.tab"        #<--- CHANGE ACCORDINGLY !!!
 
 # Enter name of mapping file: 
-mapping_file <- "merged_map.tab"         #<--- CHANGE ACCORDINGLY !!!
+mapping_file <- "merged_map-madeupmulticlass.tab"         #<--- CHANGE ACCORDINGLY !!!
 
 # Please select cross-validation method: 
 # 0 = k-fold Cross-validation (default) -
@@ -137,7 +137,7 @@ pred_df <- data.frame(samples, actual, predictions)
 pred_df <- deencoder(pred_df, mapping, "actual", "predictions")
 pred_df$Correct <- pred_df$actual == pred_df$predictions
 result <- confusionMatrix(predictions, actual)
-metrics <- data.frame(cbind(t(result$positive),t(result$byClass), t(result$overall)))
+# metrics <- data.frame(cbind(t(result$positive),t(result$byClass), t(result$overall)))
 importance <- importance$importance
 otu_names = cbind(OTU=row.names(importance), importance) # clean this code up and make sure it works in all cases (drop index also)
 importance_sorted <- otu_names[order(-otu_names$Overall), , drop=FALSE]
@@ -152,16 +152,26 @@ model_predictions <- as.data.frame(pred_df$predictions)
 write.table(importance, file="importance.tab", sep="\t")
 write.table(pred_df, file = "random_forest_predictions.tab", sep="\t", row.names = FALSE) # output to folders
 write.table(result$table, file = "confusion_matrix.tab", sep="\t", row.names = FALSE)
-write.table(metrics, file="metrics.tab", sep="\t", row.names = FALSE)
+# write.table(metrics, file="metrics.tab", sep="\t", row.names = FALSE)
 if (cv == 0 | 1) {
-    roc_rf <- roc(actual, prob$`1`)
-    pdf("roc_curve.pdf")
-    roc_plot <- plot(roc_rf, col = "blue")
-    roc_plot 
-    dev.off()
+    if (length(unique(categorical_variables[[col_name]])) == 2) {
+        roc_rf <- roc(actual, prob$`1`)
+        pdf("roc_curve.pdf")
+        roc_plot <- plot(roc_rf, col = "blue")
+        roc_plot 
+        dev.off() 
+}   else {
+        roc_rf <- multiclass.roc(actual, prob$`1`)
+        pdf("roc_curve.pdf")
+        roc_plot <- plot(roc_rf$rocs[[3]], col = "blue")
+        roc_plot
+        dev.off() 
+    } 
 } else if (cv == 2) {
-      print("Sorry LOOCV support is not yet available")
-}
+      print("Sorry LOOCV support is not yet available") 
+    }
+
+
 
 
 
