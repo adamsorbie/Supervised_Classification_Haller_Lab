@@ -75,7 +75,8 @@ flag <- all(as.logical(lib))
 #' 10. LOOCV support (needs for loop)
 #' 11. ML reading make sure everything is ok 
 #' 12. full function documentation 
-
+#' 13. source functions
+#' 14. write as package with accompanying script
 
 
 preprocess <- function(otu, scale = "clr", mapping, class_col) {
