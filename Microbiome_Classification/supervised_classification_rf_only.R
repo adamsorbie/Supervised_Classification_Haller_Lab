@@ -1,7 +1,7 @@
 ##################################################################################################################################################
 # This script performs supervised classification of a normalised OTU table. 
-# Version: 0.5.9
-# 2018-02-05  Author: Adam Sorbie 
+# Version: 0.6.0
+# 2020-01-06  Author: Adam Sorbie 
 #
 #  Please set the directory of the script as the working folder (e.g C:/studyname/NGS-Data/Microbiome_classification)
 #' Note: the path is denoted by forward slash "/"
@@ -57,30 +57,46 @@ flag <- all(as.logical(lib))
 #################################################################################################################################################
 # functions - places where you do things twice could possibly be re-written with applies
 
-defaults <- list(model = "Random Forest", 
-                 train_size = 0.7,
-                 )
+# might not need this
+# defaults <- list(model = "Random Forest", 
+#                  train_size = 0.7,
+#                  )
 
+#' to-do
+#' 1. comment functions properly
+#' 2. check all function outputs
+#' 3. error handling
+#' 4. plotting function 
+#' 5. include abundance in plotting function and return plot with subplot
+#' 6. write output function 
+#' 7. return any other useful vars
+#' 8. add other model(s)
+#' 9. ROC curve plotting function 
+#' 10. LOOCV support (needs for loop)
+#' 11. ML reading make sure everything is ok 
+#' 12. full function documentation 
 
 
 
 preprocess <- function(otu, scale = "clr", mapping, class_col) {
-  
+  # scale otu using centred log ratio transform 
   scaled_otu <- clr(otu)
+  # add class column (y) to otu table
   otu_scaled_labels <- data.frame(t(scaled_otu))
-  
   otu_scaled_labels["Class"] <- mapping[rownames(otu_scaled_labels), class_col]
   
   return(otu_scaled_labels)
 }
 
 check_dim <- function(df) {
+  # if sample size is left than 50 print warning
   if (dim(otu)[2] < 50) {
     print("Warning: small sample size detected, classifications and feature importances may be less accurate/useful")
   }
 }
 
 get_cv <- function(cv) {
+  # select cross-validation method 
   if (cv == 0) {
     fit_ctrl <- trainControl(method = "cv", number = 10)  
   } else if (cv == 1) {
@@ -88,6 +104,7 @@ get_cv <- function(cv) {
   } else if (cv == 2) {
     fit_ctrl <- trainControl(method = "LOOCV")
   } else {
+    # if no cv method selected return error
     print("Error please enter a valid selection:
         0 = k-fold cross validation
         1 = repeated k-fold cross validation
@@ -97,10 +114,10 @@ get_cv <- function(cv) {
 }
 
 train_test_split <- function(otu_scaled_labels, class_col, partition) {
-  
+  # generate indices for splitting data into test and training
   trainIndex <- createDataPartition(otu_scaled_labels[[class_col]], p=partition,
                                     list = F, times = 1)
-  
+  # 
   training <- otu_scaled_labels[trainIndex, ]
   ncol_training <- ncol(training)
   test <- otu_scaled_labels[-trainIndex,]
@@ -135,30 +152,66 @@ build_model <- function(X, y, method, ...){
   return(model)
 }
 
+
+
+get_importance_df <- function(model, topx) {
+  imp <- varImp(model)
+  imp <- imp$importance 
+  
+  if (missing(topx)) {
+    imp_sort <- imp[order(imp$Overall, decreasing = T), , drop=F]
+  }
+  else{
+    imp_sort <- imp[order(imp$Overall, decreasing = T), , drop=F] %>% 
+      top_n(topx)
+  }
+  
+  return(imp_sort)
+}
+
 pred_stats <- function(names, actual, model_predictions) {
-  df <- data.frame(names, actual, predictions)
-  df$Correct <- df$actual == df$predictions
+  df <- data.frame(names, actual, model_predictions)
+  df$Correct <- df$actual == df$model_predictions
   return(df)
 }
 
-
-if (cv == 0 | 1) {
-  if (length(unique(categorical_variables[[col_name]])) == 2) {
-    roc_rf <- roc(actual, prob$`1`)
-    pdf("roc_curve.pdf")
-    roc_plot <- plot(roc_rf, col = "blue")
-    roc_plot 
-    dev.off() 
-  }   else {
-    roc_rf <- multiclass.roc(actual, prob$`1`)
-    pdf("roc_curve.pdf")
-    roc_plot <- plot(roc_rf$rocs[[3]], col = "blue")
-    roc_plot
-    dev.off() 
-  } 
-} else if (cv == 2) {
-  print("Sorry LOOCV support is not yet available") 
+return_model_output <- function(model, X_test, output_prob = NULL, actual, ...) {
+  importance <- get_importance_df(model, ...)
+  predictions <- predict(model, newdata=X_test)
+  if (output_prob == TRUE){
+    prob <- predict(model, newdata=X_test, type="prob")
+  }
+  confusion_matrix <- confusionMatrix(predictions, actual)
+  pred_statistics <- pred_stats(row.names(X_test), actual = actual, model_predictions = predictions)
+  
+  return_list <- list("Variable_Importance" = importance,
+                      "Model_predictions" = predictions,
+                      "Confusion_matrix" = confusion_matrix, 
+                      "Prediction_accuracy" = pred_statistics)
+  if (exists("prob")) {
+    return_list <- c(return_list, list("Probabilities" = prob))
+  }
+  return(return_list)
 }
+
+# 
+# if (cv == 0 | 1) {
+#   if (length(unique(categorical_variables[[col_name]])) == 2) {
+#     roc_rf <- roc(actual, prob$`1`)
+#     pdf("roc_curve.pdf")
+#     roc_plot <- plot(roc_rf, col = "blue")
+#     roc_plot 
+#     dev.off() 
+#   }   else {
+#     roc_rf <- multiclass.roc(actual, prob$`1`)
+#     pdf("roc_curve.pdf")
+#     roc_plot <- plot(roc_rf$rocs[[3]], col = "blue")
+#     roc_plot
+#     dev.off() 
+#   } 
+# } else if (cv == 2) {
+#   print("Sorry LOOCV support is not yet available") 
+# }
 
 
 ##################################################################################################################################################
@@ -189,25 +242,14 @@ tunegrid <- rf_tune(train_test$X_train, mtry_step = 10)
 RF_cv <- train(train_test$X_train, train_test$y_train, trControl=fit_ctrl, method="rf", ntree=500 , 
                      tuneGrid=tunegrid)
 
-# re-do most of this as function 
-return_model_output <- function(model, X_test, output_prob, actual) {
-  importance <- varImp(model)
-  predictions <- predict(model, newdata=X_test)
-  if (output_prob == TRUE){
-    prob <- predict(model, newdata=X_test, type="prob")
-  }
-  confusion_matrix <- confusionMatrix(predictions, actual)
-  pred_statistics <- pred_stats(row.names(X_test), actual = actual, predictions = predictions)
-  
-  
-}
-# wrap this into smaller function and put inside output  
+# return model importance and predictions 
+model_out <- return_model_output(RF_cv, X_test = train_test$X_test, output_prob = F, actual = train_test$Actual)
+
+
+
 metrics <- data.frame(cbind(t(result$positive),t(result$byClass), t(result$overall)))
-importance <- importance$importance
-otu_names = cbind(OTU=row.names(importance), importance) # clean this code up and make sure it works in all cases (drop index also)
-importance_sorted <- otu_names[order(-otu_names$Overall), , drop=FALSE]
+
 pdf("feature_importance_top10.pdf", width = 10, height = 5)
-importance_10 <- importance_sorted[1:10, ]
 
 # write ggplot plotting function to plot var importance with abundance subplot 
 
