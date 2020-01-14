@@ -80,6 +80,8 @@ flag <- all(as.logical(lib))
 
 
 preprocess <- function(otu, scale = "clr", mapping, class_col) {
+  # clr only option atm - use list of different methods with apply to do dynamic scaling
+  
   # scale otu using centred log ratio transform 
   scaled_otu <- clr(otu)
   # add class column (y) to otu table
@@ -118,15 +120,15 @@ train_test_split <- function(otu_scaled_labels, class_col, partition) {
   # generate indices for splitting data into test and training
   trainIndex <- createDataPartition(otu_scaled_labels[[class_col]], p=partition,
                                     list = F, times = 1)
-  # 
+  # create training and test data 
   training <- otu_scaled_labels[trainIndex, ]
   ncol_training <- ncol(training)
   test <- otu_scaled_labels[-trainIndex,]
   ncol_test <- ncol(test)
-  
+  # true classes
   actual <- as.factor(test[ , ncol_test])
   
-  # generate X and y - probably a much cleaner way to write this 
+  # generate X and y - probably a much cleaner way to write this which doesn't need ncol above
   X_train <- training[,1:(ncol_training-1)]
   y_train <- training[ , ncol_training]
   X_test <- test[, 1:(ncol_test -1)]
@@ -138,9 +140,9 @@ train_test_split <- function(otu_scaled_labels, class_col, partition) {
 }
 
 rf_tune <- function(X, mtry_step) {
-  
+  # get starting value for mtry parameter (number of variables considered at each split)
   mtryStart <- floor(sqrt(ncol(X)))
-  
+  # grid search for mtry
   mtryexpand <- seq(from = mtryStart-mtry_step, to= mtryStart +mtry_step, by = 2)
   tunegrid <- expand.grid(.mtry=mtryexpand)
   return(tunegrid)
@@ -148,7 +150,9 @@ rf_tune <- function(X, mtry_step) {
 
 # xgboost_tune <- function(X, )
 
+# make sensible defaults for xgboost, svm and random forest 
 build_model <- function(X, y, method, ...){
+  # train a specified model 
   model <- train(X, y, method = method, trControl = fit_ctrl, ...)
   return(model)
 }
@@ -156,6 +160,7 @@ build_model <- function(X, y, method, ...){
 
 
 get_importance_df <- function(model, topx) {
+  # get variable importance from model
   imp <- varImp(model)
   imp <- imp$importance 
   
